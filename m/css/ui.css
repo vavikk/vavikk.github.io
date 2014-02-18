@@ -1,0 +1,396 @@
+/* Pattison UI CSS File Version: Alpha .1 Author: V. Jerebnii */
+/*============================Colors========================== */
+/*===========================Font============================== */
+@font-face {
+  font-family: "FuturaStdBook";
+  src: url("fonts/futurastd-book.eot");
+  src: url("fonts/futurastd-book.eot") format("embedded-opentype"), url("fonts/futurastd-book.woff") format("woff"), url("fonts/futurastd-book.ttf") format("truetype"), url("fonts/futurastd-book.svg#FuturaStdBook") format("svg"); }
+
+/* ==========================Headings========================== */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000325}}
+html,
+html a {
+  -webkit-font-smoothing: antialiased !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000331}}
+h2 {
+  font-family: FuturaStdBook;
+  font-size: 32px;
+  color: black;
+  text-transform: uppercase;
+  text-align: left; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000337}}
+h3 {
+  font-family: FuturaStdBook;
+  font-size: 24px;
+  color: black;
+  text-align: left; }
+
+/* ================================paragraph========================== */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000344}}
+.p24 {
+  font-family: FuturaStdBook;
+  font-size: 24px;
+  color: black;
+  text-align: left; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000349}}
+.p16 {
+  font-family: FuturaStdBook;
+  font-size: 16px;
+  color: #636363;
+  text-align: left; }
+
+/*================================links=============================== */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000355}}
+a {
+  color: #0079c1; }
+
+/* palette */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000361}}
+.palette {
+  width: 416px;
+  height: 40px;
+  display: block;
+  list-style: none;
+  padding: 0; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000367}}
+  .palette li {
+    float: left;
+    display: block;
+    width: 40px;
+    height: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000373}}
+    .palette li:first-child {
+      background: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000375}}
+    .palette li:nth-child(2) {
+      background: black; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000377}}
+    .palette li:nth-child(3) {
+      background: #00275e; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000379}}
+    .palette li:nth-child(4) {
+      background: #0079c1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000381}}
+    .palette li:nth-child(5) {
+      background: #8e8e8e; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000383}}
+    .palette li:nth-child(6) {
+      background: #c6c6c6; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000385}}
+    .palette li:nth-child(7) {
+      background: #d8d9d8; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000387}}
+    .palette li:last-child {
+      background: #eaeaea; }
+
+/*=============================Rep box============================ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000391}}
+.rep-img {
+  background: black;
+  width: 170px;
+  height: 170px; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\0000395}}
+.rep-info {
+  display: block;
+  height: 170px;
+  padding: 0 30px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003100}}
+  .rep-info p {
+    margin: 0 !important; }
+
+/*====================================Mobile Nav ============================= */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003103}}
+.header {
+  display: block;
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  position: relative; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003110}}
+.mb-wrapper {
+  height: 100%;
+  display: block;
+  position: relative;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  z-index: 1; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003122}}
+.wrap-pushRight {
+  -webkit-transform: translate3d(300px, 0, 0); }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003126}}
+.nav-pushRight {
+  left: 0 !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003129}}
+.nav-plus-20 {
+  left: 20px !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003132}}
+.nav-push-level2 {
+  left: 0 !important; }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003135}}
+nav.mobile_menu {
+  z-index: 2;
+  position: absolute;
+  font-family: "FuturaStdBook";
+  width: 320px;
+  margin: 0;
+  left: -320px;
+  top: 0;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  /*Back header */ }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003152}}
+  nav.mobile_menu .nav-header, nav.mobile_menu .m-back {
+    width: 100%;
+    height: 60px;
+    display: block;
+    border-bottom: 1px solid #303d51;
+    background: #001029;
+    padding: 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003159}}
+    nav.mobile_menu .nav-header #m-pusher, nav.mobile_menu .m-back #m-pusher {
+      display: block;
+      width: 100%;
+      height: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003163}}
+      nav.mobile_menu .nav-header #m-pusher span, nav.mobile_menu .m-back #m-pusher span {
+        font-size: 24px;
+        color: white;
+        float: right; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003169}}
+  nav.mobile_menu .m-back {
+    background: #00275e; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003174}}
+  nav.mobile_menu .m-search span {
+    color: #8e8e8e; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003176}}
+  nav.mobile_menu .m-search input, nav.mobile_menu .m-search form.line textarea, form.line nav.mobile_menu .m-search textarea {
+    border: none;
+    width: 85%;
+    height: 40px;
+    padding: 5px;
+    background: transparent;
+    border-bottom: 2px solid transparent;
+    color: #c6c6c6;
+    font-size: 24px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003196}}
+    nav.mobile_menu .m-search input:focus, nav.mobile_menu .m-search form.line textarea:focus, form.line nav.mobile_menu .m-search textarea:focus {
+      outline: none;
+      border-color: #c6c6c6; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003200}}
+  nav.mobile_menu ul {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #001029;
+    z-index: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003207}}
+    nav.mobile_menu ul .first-level-overlay {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 0;
+      padding: 0;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      opacity: 0;
+      overflow: hidden;
+      background: #001029;
+      -webkit-transition: all 0.5s;
+      -moz-transition: all 0.5s;
+      -ms-transition: all 0.5s;
+      -o-transition: all 0.5s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003224}}
+    nav.mobile_menu ul .overlay-active {
+      height: 100%;
+      opacity: 1; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003230}}
+    nav.mobile_menu ul li {
+      font-size: 24px;
+      color: #0079c1;
+      padding: 18px 25px;
+      border-bottom: 1px solid #303d51;
+      text-transform: uppercase; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003237}}
+      nav.mobile_menu ul li a {
+        color: white;
+        text-transform: capitalize;
+        font-size: 20px;
+        padding-left: 25px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003243}}
+      nav.mobile_menu ul li ul {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: #00275e;
+        z-index: 4;
+        top: 0;
+        left: -380px;
+        margin-left: -30px;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -ms-transition: all 0.5s;
+        -o-transition: all 0.5s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003260}}
+        nav.mobile_menu ul li ul li a {
+          font-size: 16px; }
+
+/*===================================Dropbox================================= */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003267}}
+.drop {
+  display: block;
+  width: 100%;
+  height: 36px;
+  position: relative;
+  background: #00275e;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  z-index: 9999; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003279}}
+  .drop .result {
+    color: white;
+    display: block;
+    padding: 9px 15px;
+    height: 100%;
+    font-family: FuturaStdBook;
+    font-size: 16px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003288}}
+  .drop .icon {
+    width: 32px;
+    height: 16px;
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    font-size: 16px;
+    color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003299}}
+  .drop ul {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003311}}
+    .drop ul li {
+      display: block;
+      width: 100%; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003314}}
+      .drop ul li a {
+        display: block;
+        width: 100%;
+        background: white;
+        color: #636363;
+        border-bottom: 1px solid #d8d9d8;
+        text-decoration: none;
+        font-family: FuturaStdBook;
+        font-size: 16px;
+        padding: 10px 15px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003326}}
+        .drop ul li a:hover {
+          background: #8e8e8e;
+          color: white; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003331}}
+        .drop ul li a:last-child a {
+          border-bottom: none; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003336}}
+  .drop .show_tabs {
+    max-height: 800px !important; }
+
+/*========================================================INPUT LINE ========================== */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003340}}
+form.line {
+  font-family: "FuturaStdBook"; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003342}}
+  form.line .shown {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003347}}
+  form.line label {
+    width: 99%;
+    color: #636363;
+    position: relative;
+    font-size: 16px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003352}}
+    form.line label .icon-close {
+      visibility: hidden;
+      position: absolute;
+      right: 5px;
+      top: 28px;
+      font-size: 24px;
+      color: #00275e;
+      cursor: hand;
+      opacity: 0;
+      -webkit-transition: all 0.1s ease-in-out;
+      -moz-transition: all 0.1s ease-in-out;
+      -ms-transition: all 0.1s ease-in-out;
+      -o-transition: all 0.1s ease-in-out; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003367}}
+  form.line input, form.line textarea {
+    border: none;
+    width: 99%;
+    height: 40px;
+    padding: 5px 32px 5px 0px;
+    background: transparent;
+    border-bottom: 2px solid #d8d9d8;
+    color: #00275e;
+    font-size: 24px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003387}}
+    form.line input:focus, form.line textarea:focus {
+      outline: none;
+      border-color: #00275e; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003391}}
+  form.line textarea {
+    height: 140px; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003396}}
+  form.line button {
+    background: #00275e;
+    color: white;
+    font-weight: normal;
+    font-size: 28px;
+    padding: 8px 28px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003412}}
+    form.line button:hover {
+      color: white;
+      background: #001d54; }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/vitaliejerebnii\/node\/bootstraptabs\/css\/ui\.sass}line{font-family:\00003415}}
+    form.line button:focus {
+      outline: none;
+      color: white;
+      border: 1px solid #c6c6c6; }

@@ -1,0 +1,426 @@
+/* Pattison UI CSS File Version: Alpha .1 Author: V. Jerebnii */
+
+/*============================Colors==========================*/
+
+$white:            #fff
+$black:            #000
+$bold-blue:        #001029
+$dark-blue:        #00275e 
+$light-blue:       #0079c1
+$soft-blue:        #303d51
+$form-grey:        #636363
+$dark-grey:        #8e8e8e
+$grey:             #c6c6c6
+$light-grey:       #d8d9d8
+$super-light-grey: #eaeaea
+
+/*===========================Font==============================*/
+@font-face 
+    font-family: 'FuturaStdBook'
+    src: url('fonts/futurastd-book.eot')
+    src: url('fonts/futurastd-book.eot') format('embedded-opentype'), url('fonts/futurastd-book.woff') format('woff'), url('fonts/futurastd-book.ttf') format('truetype'), url('fonts/futurastd-book.svg#FuturaStdBook') format('svg')
+    
+
+/* ==========================Headings==========================*/
+html,
+html a 
+    -webkit-font-smoothing:  antialiased !important
+    
+    
+
+h2
+    font-family:    FuturaStdBook
+    font-size:      32px
+    color:          $black
+    text-transform: uppercase
+    text-align: left
+h3  
+    font-family:    FuturaStdBook
+    font-size:      24px
+    color:          $black
+    
+    text-align: left
+/* ================================paragraph==========================*/
+.p24
+    font-family:    FuturaStdBook
+    font-size:      24px
+    color:          $black
+    text-align: left
+.p16
+    font-family:    FuturaStdBook
+    font-size:      16px
+    color:          $form-grey
+    text-align: left
+/*================================links===============================*/
+a
+    color: $light-blue
+
+
+   
+/* palette */
+.palette
+    width: 416px
+    height: 40px
+    display: block
+    list-style: none
+    padding: 0
+    li
+        float: left
+        display: block
+        width: 40px
+        height: 100%
+        
+        &:first-child
+            background: $white
+        &:nth-child(2)
+            background: $black 
+        &:nth-child(3)
+            background: $dark-blue
+        &:nth-child(4)
+            background: $light-blue 
+        &:nth-child(5)
+            background: $dark-grey
+        &:nth-child(6)
+            background: $grey
+        &:nth-child(7)
+            background: $light-grey
+        &:last-child
+            background: $super-light-grey
+            
+/*=============================Rep box============================*/
+.rep-img
+    background: $black
+    width: 170px
+    height: 170px
+.rep-info
+    display: block
+     
+    height: 170px
+    padding: 0 30px 
+    p
+        margin: 0!important
+/*====================================Mobile Nav =============================*/
+.header
+    display: block
+    width: 100%
+    height: 60px
+    padding: 10px
+    position: relative
+     
+.mb-wrapper
+    height: 100%
+     
+    display: block
+    position: relative
+    -webkit-transition: all .5s ease-in-out
+    -moz-transition: all .5s ease-in-out
+    -ms-transition: all .5s ease-in-out
+    -o-transition: all .5s ease-in-out
+    z-index: 1
+    
+    //pushers for menu
+.wrap-pushRight
+    
+    -webkit-transform: translate3d(300px, 0, 0)
+    //level1 navigation
+.nav-pushRight
+    left: 0!important
+
+.nav-plus-20
+    left: 20px!important
+    //level2 navigation
+.nav-push-level2
+    left: 0!important
+    
+nav.mobile_menu
+    z-index: 2
+    position: absolute
+    
+    font-family: 'FuturaStdBook'
+    
+    width: 320px
+    
+    margin: 0
+    left: -320px
+    top: 0
+    -webkit-transition: all .5s ease-in-out
+    -moz-transition: all .5s ease-in-out
+    -ms-transition: all .5s ease-in-out
+    -o-transition: all .5s ease-in-out
+    
+        
+    .nav-header
+        width: 100%
+        height: 60px
+        display: block
+        border-bottom: 1px solid $soft-blue
+        background: $bold-blue
+        padding: 15px
+        #m-pusher
+            display: block
+            width: 100%
+            height: 100%
+            span
+                font-size: 24px
+                color: $white
+
+                float: right
+    /*Back header*/
+    .m-back 
+        @extend .nav-header
+        background: $dark-blue
+    //Search first/second level
+    .m-search
+        span
+            color: $dark-grey
+        input
+            border: none
+            width: 85%
+            height: 40px
+            padding: 5px 
+
+            background: transparent
+
+            border-bottom: 2px solid transparent
+
+            color: $grey
+
+            font-size: 24px   
+
+
+
+            -webkit-transition: all 0.20s ease-in-out
+            -moz-transition: all 0.20s ease-in-out
+            -ms-transition: all 0.20s ease-in-out
+            -o-transition: all 0.20s ease-in-out
+            &:focus
+                outline: none 
+                border-color: $grey 
+        
+    ul
+        width: 100%
+        list-style: none
+        margin: 0
+        padding: 0
+        background: $bold-blue
+        z-index: 1
+        .first-level-overlay
+            display: block
+            position: absolute
+            width: 100%
+            height: 0
+            padding: 0
+            top: 0
+            left: 0
+            z-index: 3
+            opacity: 0
+            overflow: hidden
+            background: $bold-blue
+            -webkit-transition: all .5s  
+            -moz-transition: all .5s  
+            -ms-transition: all .5s  
+            -o-transition: all .5s     
+            
+        .overlay-active
+            height: 100%
+            
+            opacity: 1
+             
+            
+        li
+            font-size: 24px
+            color: $light-blue
+            padding: 18px 25px
+            border-bottom: 1px solid $soft-blue
+            text-transform: uppercase
+                
+            a
+                color: $white
+                text-transform: capitalize
+                font-size: 20px
+                padding-left: 25px
+    
+            ul
+                //display: none
+                position: absolute
+                height: 100%
+                width: 100%
+                background: $dark-blue
+                z-index: 4
+                top: 0
+                left: -380px
+                margin-left: -30px
+                -webkit-transition: all .5s  
+                -moz-transition: all .5s  
+                -ms-transition: all .5s  
+                -o-transition: all .5s  
+                
+    
+                li
+                    a
+                        font-size: 16px
+                   
+
+
+    
+/*===================================Dropbox=================================*/
+.drop
+    display: block 
+    width: 100%
+    height: 36px 
+    position: relative 
+    background: #00275e
+    -webkit-border-radius: 5px
+    -moz-border-radius: 5px 
+    border-radius: 5px 
+    margin-top: 20px 
+    margin-bottom: 10px 
+    z-index: 9999
+    .result
+        color: white  
+        display: block  
+        padding: 9px 15px  
+        height: 100%  
+        font-family: FuturaStdBook 
+        font-size: 16px 
+                
+                
+    .icon 
+        width: 32px 
+        height: 16px 
+        position: absolute 
+        right: 0px 
+        top: 10px 
+        font-size: 16px 
+        color: #fff 
+         
+  
+   
+    ul
+        list-style: none 
+        width: 100%
+        padding: 0 
+        max-height: 0 
+        
+        overflow: hidden        
+        -webkit-transition: all .5s 
+        -moz-transition: all .5s 
+        -ms-transition: all .5s 
+        -o-transition: all .5s 
+        transition: all .5s  
+        li 
+            display: block  
+            width: 100% 
+            a
+                display: block 
+                width: 100% 
+                background: #fff 
+                color: #636363 
+                border-bottom: 1px solid #d8d9d8 
+                text-decoration: none 
+                       
+                font-family: FuturaStdBook 
+                font-size: 16px 
+                       
+                padding: 10px 15px 
+                &:hover
+                    background: #8e8e8e 
+                    color: white 
+                        
+                &:last-child 
+                    a
+                        border-bottom: none 
+    
+   
+        
+    .show_tabs 
+        max-height: 800px!important 
+              
+/*========================================================INPUT LINE ==========================*/
+form.line
+    font-family: 'FuturaStdBook'
+    .shown
+        display: block!important
+        visibility: visible!important
+        opacity: 1!important
+    
+    label 
+        width: 99%
+        color: $form-grey
+        position: relative
+        font-size: 16px
+        .icon-close
+            //display: none
+            visibility: hidden
+            position: absolute 
+            right: 5px 
+            top: 28px 
+            font-size: 24px 
+            color: $dark-blue
+            cursor: hand
+            opacity: 0
+            -webkit-transition: all 0.10s ease-in-out
+            -moz-transition: all 0.10s ease-in-out
+            -ms-transition: all 0.10s ease-in-out
+            -o-transition: all 0.10s ease-in-out
+        
+    input
+        border: none
+        width: 99%
+        height: 40px
+        padding: 5px 32px 5px 0px 
+
+        background: transparent
+
+        border-bottom: 2px solid $light-grey
+
+        color: $dark-blue
+        
+        font-size: 24px   
+        
+        
+
+        -webkit-transition: all 0.20s ease-in-out
+        -moz-transition: all 0.20s ease-in-out
+        -ms-transition: all 0.20s ease-in-out
+        -o-transition: all 0.20s ease-in-out
+        &:focus
+            outline: none
+            border-color: $dark-blue
+    
+    textarea
+        @extend input
+        height: 140px
+            
+         
+    button
+        background: $dark-blue
+        color: $white
+        
+        font-weight: normal
+        font-size: 28px   
+        
+        padding: 8px 28px
+        
+        text-transform: uppercase
+            
+            
+        -webkit-transition: all 0.20s ease-in-out
+        -moz-transition: all 0.20s ease-in-out
+        -ms-transition: all 0.20s ease-in-out
+        -o-transition: all 0.20s ease-in-out
+        &:hover
+            color: $white
+            background: $dark-blue - 10
+        &:focus
+            outline: none
+            color: $white
+            border: 1px solid $grey
+    
+    
+    
+    
+    
+    
+    
+    
