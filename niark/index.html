@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!-- Enable responsive view on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Home</title>
+ 
+ 
+<style>
+ body{height: 100%;
+	margin: 0;
+	overflow: hidden;
+	position: absolute;
+	width: 100%;
+    background: #000;}
+        video {
+    
+    display: block;
+    height: 100%;
+    width: 100%;
+    z-index:100;
+     
+}
+        
+       /* Minimum height/width */
+
+.minHeightWidth {
+	height: auto;
+	width: auto;
+	min-height: 100%;
+	min-width: 100%;
+	position: absolute;
+}
+
+/* CSS Transforms */
+
+.transform {
+/* Demo value set with javascript.
+	transform: scale(1);
+	-webkit-transform: scale(1);
+*/
+}
+
+/* CSS Transform-Origin */
+
+.transform-origin {
+/* Demo value set with javascript.
+	transform-origin: 20% 50%;
+	-webkit-transform-origin: 90% 50%;
+*/
+}
+   header{
+            position: absolute!important;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+             
+        }
+    nav ul{margin: 0;
+         padding: 0;
+         list-style: none;
+         margin-top: 45px;
+         float: right;
+         margin-right:80px;}
+         
+    nav ul li {float: left; display: block; margin-left: 40px;} 
+    nav ul li a{color: white; font-family: 'Lato', sans-serif; font-weight:400; text-decoration: none; font-size: 1em; } 
+    
+    .last-news{width: 300px; position: absolute;
+      right:0; top: 40%;
+      height: 300px;
+     
+       
+      
+      z-index: 9999;
+      -webkit-perspective: 3000;
+      }
+    .l-news-img-holder{ 
+         position: absolute;
+         right:0; top: 0%;
+        
+         width: 300px;
+         height: 280px; 
+          overflow: hidden;
+         }
+         
+     
+    .l-news-title-holder{
+        position: absolute;
+        width: 300px;
+        height: 30px;
+        top:   -30px;
+        left:0;
+        background: #00aacf;
+        line-height: 30px;
+        color: white;
+        font-family: 'Lato', sans-serif; font-weight:100;
+        font-size: 18px;
+        text-indent: 10px;
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        -webkit-transform-origin: 50% 100%; 
+        -webkit-transform: rotateX(-90deg);
+     
+        -webkit-animation: rotateUp .3s 2.4s forwards cubic-bezier(0.190, 1.000, 0.220, 1.000); 
+        opacity: 0; 
+    }
+    .l-news-title-holder > span{
+        opacity: 0;
+        display: block;
+        -webkit-transform: translateX(10px);
+        -webkit-animation: enterText .45s 2.7s forwards cubic-bezier(0.190, 1.000, 0.220, 1.000); 
+    }
+    
+    
+    .l-news-latest-title{
+        position: absolute;
+        width: 300px;
+        height: 30px;
+        top:   280px;
+        left:0;
+        background: #fff;
+        line-height: 30px;
+        color: #4a93bc;
+        font-family: 'Lato', sans-serif; font-weight:300;
+        text-indent: 10px;
+        font-size: 18px;
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        -webkit-transform-origin: 50% 0%; 
+        -webkit-transform: rotateX(90deg);
+        -webkit-animation: rotateUp .3s 2.4s forwards cubic-bezier(0.190, 1.000, 0.220, 1.000);  
+       
+        opacity: 0; 
+        
+    } 
+    .l-news-latest-title > span{
+        opacity: 0;
+        display: block;
+        -webkit-transform: translateX(20px);
+        -webkit-animation: enterText .5s 2.7s forwards cubic-bezier(0.190, 1.000, 0.220, 1.000); 
+    }
+    
+    .l-news-latest-info{
+        position: absolute;
+        width: 300px;
+        height: 60px;
+        top:   310px;
+        left:0;
+        background: #e7e7e7;
+        line-height: 60px;
+        font-size: 32px;
+        color: #151515;
+        font-family: 'Lato', sans-serif; font-weight:300;
+        text-indent: 10px;
+        
+        -webkit-transform-origin: 50% 0%; 
+        -webkit-transform: scaleY(0);
+        -webkit-animation: expandDown .4s 2.70s forwards cubic-bezier(0.190, 1.000, 0.220, 1.000);  
+       
+       
+        opacity: 0; 
+        
+    } 
+     
+    .l-news-latest-info > span{
+        opacity: 0;
+        display: block;
+        -webkit-transform: translateX(-5px);
+        -webkit-animation: enterText .5s 2.9s forwards cubic-bezier(0.190, 1.000, 0.220, 1.000); 
+         
+     }
+    .l-news-latest-info > img{
+        position: absolute;
+        top: 15px;
+        right: 90px;
+        opacity: 0;
+        display: block;
+        -webkit-transform: translateX(-25px);
+        -webkit-animation: enterText .5s 3.1s forwards cubic-bezier(0.190, 1.000, 0.220, 1.000); 
+         
+     }
+     
+    
+    .l-news-img-holder img{ top:-20px; opacity:0; position:absolute; 
+         -webkit-animation: enterImage .5s 2s forwards cubic-bezier(0.190, 1.000, 0.220, 1.000);  
+    }
+    @-webkit-keyframes enterImage
+    {100% { opacity: 1;  top: 0;}
+    }
+    
+    @-webkit-keyframes rotateUp
+    {
+        
+        
+    100% { -webkit-transform: rotateX(0deg); opacity: 1;}
+    }
+     @-webkit-keyframes expandDown
+    {
+    100% {-webkit-transform: scaleY(1);opacity: 1; }
+    }
+    @-webkit-keyframes enterText
+    {
+    100% {-webkit-transform: translateX(0px);opacity: 1; }
+    }
+    
+    
+  </style>  
+  </head>
+  
+ <body>
+     
+<header>
+    
+    <nav>
+        <ul>
+        <li><a href="">NEWS</a></li>
+        <li><a href="">PORTFOLIO</a></li>
+        <li><a href="">SHOP</a></li>
+        <li><a href="">ABOUT</a></li>
+        <li><a href="">CONTACT</a></li>
+        </ul>
+    </nav>
+    
+</header>
+ 
+          <div class="last-news">
+               <div class="l-news-title-holder"><span>Latest News</span></div>
+               <div class="l-news-img-holder"><img src="assets/img/news.jpg" /></div>
+               <div class="l-news-latest-title"><span>This is my image...</span> </div>
+               <div class="l-news-latest-info"><span>More News</span><img src="assets/img/next.png" alt=""> </div>
+          </div>
+           
+               <video autoplay loop id="player" data-origin-x="50" data-origin-y="50">
+                    <!--video autoplay loop poster="polina.jpg" id="bgvid"-->
+                    <!--source src="polina.webm" type="video/webm"-->
+                    <!--source src="<?php echo $ASSETS_DIR ?>/video/mall.mp4" type="video/mp4"--> 
+                    <source src="assets/video/niark.mp4" type="video/mp4"> 
+                </video>
+  </body>
+      <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>var $player = $('#player');
+			var player = $player.get(0);
+			var $parent = $player.parent();
+			var $win = $(window);
+			var resizeTimeout = null;
+			var shouldResize = true;
+			var shouldPosition = true;
+			var videoRatio = 16 / 9;
+
+			player.volume = 0; // mute
+
+			var resize = function() {
+				if (!shouldResize) { return; }
+
+				var height = $parent.height();
+				var width = $parent.width();
+				var viewportRatio = width / height;
+				var scale = 1;
+
+				if (videoRatio < viewportRatio) {
+					// viewport more widescreen than video aspect ratio
+					scale = viewportRatio / videoRatio;
+				} else if (viewportRatio < videoRatio) {
+					// viewport more square than video aspect ratio
+					scale = videoRatio / viewportRatio;
+				}
+
+				var offset = positionVideo(scale, width, height);
+				setVideoTransform(scale, offset);
+			};
+
+			var setVideoTransform = function(scale, offset) {
+				offset = $.extend({ x: 0, y: 0 }, offset);
+				var transform = 'translate(' + Math.round(offset.x) + 'px,' + Math.round(offset.y) + 'px) scale(' + scale  + ')';
+				$player.css({
+					'-webkit-transform': transform,
+					'transform': transform
+				});
+			};
+
+			// accounts for transform origins on scaled video
+			var positionVideo = function(scale, width, height) {
+				if (!shouldPosition) { return false; }
+
+				var x = parseInt($player.data('origin-x'), 10);
+				var y = parseInt($player.data('origin-y'), 10);
+				setVideoOrigin(x, y);
+
+				var viewportRatio = width / height;
+				var scaledHeight = scale * height;
+				var scaledWidth = scale * width;
+				var percentFromX = (x - 50) / 100;
+				var percentFromY = (y - 50) / 100;
+				var offset = {};
+
+				if (videoRatio < viewportRatio) {
+					offset.x = (scaledWidth - width) * percentFromX;
+				} else if (viewportRatio < videoRatio) {
+					offset.y = (scaledHeight - height) * percentFromY;
+				}
+
+				return offset;
+			};
+
+			var setVideoOrigin = function(x, y) {
+				var origin = x + '% ' + y + '%';
+				$player.css({
+					'-webkit-transform-origin': origin,
+					'transform-origin': origin
+				});
+			};
+
+			$win.on('resize', function() {
+				clearTimeout(resizeTimeout);
+				resizeTimeout = setTimeout(resize, 100);
+			});
+			
+			resize();
+</script>
+ 
+
+  
+</html>
+ 
+ 
+
+ 
