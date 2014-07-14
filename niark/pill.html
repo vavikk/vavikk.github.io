@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!-- Enable responsive view on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Responsive Tiled Photo Gallery in Pure CSS</title>
+  
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+      background: #2e7196;
+      position: relative;
+    }
+    .wrap {
+      overflow: hidden;
+      margin: 10px;
+      position: relative;
+    }
+    .box {
+      float: left;
+      position: relative;
+      width: 25%;
+      padding-bottom: 25%;
+    }
+    .boxInner {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      top: 10px;
+      bottom: 10px;
+      opacity:0;
+      background: #2a6383;
+      overflow: hidden;
+    }
+    .boxInner img {
+      width: 100%;
+      opacity: 0;
+      position: absolute;
+      top:-50px;
+        
+    }
+    .boxInner .titleBox {
+      position: absolute;
+       
+      left: 0;
+      right: 0;
+      bottom: -100%;
+      height:40px;
+      background: #e7e7e7;
+       
+      display: block;
+      
+    }
+    .boxInner .titleBox span{
+     font-size: 14px;
+     font-family: 'Lato', sans-serif; font-weight:300; 
+     position: absolute;
+      
+    }
+      .boxInner .titleBox span.title{
+     color: #151515;
+     left:0;
+         font-size: 16px;
+     top:10px;
+     width: 60%;
+     left: 30px;
+     opacity:0;
+     text-overflow: ellipsis;
+          white-space: nowrap;       /* Перво-наперво, запретим перенос строк */
+    overflow: hidden;          /* Скрываем текст, который не помещается в блок */
+    text-overflow: ellipsis;   /* Уводим текст в многоточие */
+    display: block;       
+    }
+    .boxInner .titleBox span.date{
+     
+     background: #000;
+     display: block;
+     right: 0;
+     width: 40%;
+     height: 100%;
+      
+     font-family: 'Lato', sans-serif; font-weight:300; 
+    }
+     .boxInner .titleBox span.date > span.numbers{
+       color: #fff;
+       display: block;
+       right: 0;
+       width: 100%;
+       height: 100%;
+       text-align: center;
+       line-height: 40px;
+       opacity:0;
+     }
+      
+      
+    body.no-touch .boxInner:hover .titleBox, body.touch .boxInner.touchFocus .titleBox {
+      margin-bottom: 0;
+    }
+    @media only screen and (max-width : 480px) {
+      /* Smartphone view: 1 tile */
+      .box {
+        width: 100%;
+        padding-bottom: 100%;
+      }
+    }
+    @media only screen and (max-width : 650px) and (min-width : 481px) {
+      /* Tablet view: 2 tiles */
+      .box {
+        width: 50%;
+        padding-bottom: 50%;
+      }
+    }
+    @media only screen and (max-width : 1050px) and (min-width : 651px) {
+      /* Small desktop / ipad view: 3 tiles */
+      .box {
+        width: 33.3%;
+        padding-bottom: 33.3%;
+      }
+    }
+    @media only screen and (max-width : 1290px) and (min-width : 1051px) {
+      /* Medium desktop: 4 tiles */
+      .box {
+        width: 25%;
+        padding-bottom: 25%;
+      }
+    }
+    
+    header{
+            position: relative;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+             
+             
+        }
+    nav ul{margin: 0;
+         padding: 0;
+         list-style: none;
+         margin-top: 45px;
+         float: right;
+         margin-right:80px;
+          }
+         
+    nav ul li {float: left; display: block; margin-left: 40px; transform-style: preserve-3d;
+       
+       } 
+    nav ul li a{color: white; font-family: 'Lato', sans-serif; font-weight:400; text-decoration: none; font-size: 1em; } 
+    
+  </style>
+  <!-- Enable media queries for old IE -->
+  <!--[if lt IE 9]>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+  <![endif]-->
+
+</head>
+
+<body class="no-touch">
+<header>
+    
+    <nav>
+        <ul>
+        <li><a href="">NEWS</a></li>
+        <li><a href="">PORTFOLIO</a></li>
+        <li><a href="">SHOP</a></li>
+        <li><a href="">ABOUT</a></li>
+        <li><a href="">CONTACT</a></li>
+        </ul>
+    </nav>
+    
+</header>
+  <div class="wrap">
+    
+    <!-- Define all of the tiles: -->
+    <div class="box">
+      <div class="boxInner">
+        <img src="assets/img/cosmicaremix2013.jpg" />
+        <div class="titleBox">
+            <span class="title"> GALACTIC REMIX for ILL GATES</span> 
+            <span class="date"><span class="numbers">2014/06/07</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="boxInner">
+        <img src="assets/img/criticalz4.jpg" />
+        <div class="titleBox">
+          <span class="title"> CRITICALZ
+ </span> 
+            <span class="date"><span class="numbers">2014/06/07</span></span>
+          </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="boxInner">
+        <img src="assets/img/criticalzniark1.jpg" />
+        <div class="titleBox">
+          <span class="title"> CRITICALZ
+ </span> 
+            <span class="date"><span class="numbers">2014/06/07</span></span>
+          </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="boxInner">
+        <img src="assets/img/devilbat.jpg" />
+       <div class="titleBox">
+          <span class="title"> THE DEVIL
+ </span> 
+            <span class="date"><span class="numbers">2014/06/07</span></span>
+          </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="boxInner">
+        <img src="assets/img/exorbitusweb.jpg" />
+        <div class="titleBox">
+          <span class="title"> EXORBITUS
+ </span> 
+            <span class="date"><span class="numbers">2014/06/07</span></span>
+          </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="boxInner">
+        <img src="assets/img/ghost.jpg" />
+       <div class="titleBox">
+          <span class="title"> GRaahh
+ </span> 
+            <span class="date"><span class="numbers">2014/06/07</span></span>
+          </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="boxInner">
+        <img src="assets/img/hypnotica.jpg" />
+       <div class="titleBox">
+          <span class="title"> GRaahh
+ </span> 
+            <span class="date"><span class="numbers">2014/06/07</span></span>
+          </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="boxInner">
+        <img src="assets/img/maksmystocowl.jpg" />
+        <div class="titleBox">
+          <span class="title"> GRaahh
+ </span> 
+            <span class="date"><span class="numbers">2014/06/07</span></span>
+          </div>
+      </div>
+    </div>
+     
+    
+  </div>
+  <!-- /#wrap -->
+  
+  <!-- Add some JavaScript to enable toggling the descriptions when an image is tapped on a touchscreen device -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <script src="assets/js/velocity.min.js"></script>
+  <script type="text/javascript">
+    //$('.titleBox').velocity({ marginBottom: 0 }, 1000);
+    $('.boxInner').velocity({ opacity:1 }, 500);
+      
+    $('.boxInner img').each(function(index){
+        var duration = getRandomInt(200,900);
+        var delay =    getRandomInt(200,900);
+        
+       
+        $(this).velocity({ opacity:1,top:0 }, { duration:duration,delay: delay, easing:[ .17,.67,.65,.76 ] });
+        $(this).parent().find('.titleBox').velocity({  bottom: 0 },{ duration:1000, delay: duration,easing:"easeOutSine",complete: function() { 
+               $(this).find(".title").velocity({ left: 10, opacity:1 }, 300,{easing: "easeInSine" });
+               $(this).find(".date").velocity({ width: "30%" }, 500,{easing: "easeOutCirc" });
+               $(this).find(".numbers").velocity({ opacity: 1 }, { duration:300, delay: 300,easing:"easeOutSine"});
+        }
+                                                                    });
+    });
+    
+    function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+    
+      
+      
+      $(function(){
+      // See if this is a touch device
+      if ('ontouchstart' in window)
+      {
+        // Set the correct body class
+        $('body').removeClass('no-touch').addClass('touch');
+        
+        // Add the touch toggle to show text
+        $('div.boxInner img').click(function(){
+          $(this).closest('.boxInner').toggleClass('touchFocus');
+        });
+      }
+    });
+  </script>
+  
+</body>
+</html>
