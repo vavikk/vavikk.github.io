@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">js/deviceInfo.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/auth.js~Auth.html">Auth</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/deviceInfo.js~Device.html">Device</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/model.js~Model.html">Model</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/pubsub.js~PubSub.html">PubSub</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-listenTo">listenTo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isEqual">isEqual</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isObject">isObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isUndefined">isUndefined</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">js/deviceInfo.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">class Device {
+  constructor() {
+    this.isiPad = false;
+    this.isiPhone = false;
+    this.isiPhoneIOS7 = false;
+    this.isiPhoneIOS8 = false;
+    this.isiPhoneIOS9 = false;
+    this.isiPod = false;
+    this.isAndroidDevice = false;
+    this.isSamsungS = false;
+    this.isOneX = false;
+    this.isHTCOne = false;
+    this.isAndroid23Device = false;
+    this.isAndroid400 = false;
+    this.isAndroid410 = false;
+    this.isAndroidTablet = false;
+    this.isAndroid3Tablet = false;
+    this.isDesktop = false;
+    this.has3DTransforms = this.has3DTransforms()
+    this.useLegacyScaling = false;
+    this.isChrome = false;
+    this.isChrome280 = false;
+    this.isSafari = false;
+    this.isChromeForIOS = false;
+    this._detectDevice()
+  }
+  detectDevice() {
+    throw new Error(&quot;detectDevice is private method&quot;)
+  }
+  _detectDevice() {
+    var m = navigator.userAgent;
+    if (m.match(/Chrome/i)) {
+      this.isChrome = true;
+      if (m.match(/Chrome\/28[\.\d]/i)) {
+        this.isChrome280 = true
+      }
+    }
+    if (m.match(/CriOS/i)) {
+      this.isChromeForIOS = true
+    }
+    if (m.match(/Safari/i) &amp;&amp; !this.isChromeForIOS) {
+      this.isSafari = true
+    }
+    if (m.match(/iPad/i) !== null) {
+      this.isiPad = true
+    } else {
+      if ((m.match(/iPod/i))) {
+        this.isiPod = true
+      } else {
+        if ((m.match(/iPhone/i))) {
+          var i = &quot;3gs,4,4s&quot;,
+            o = &quot;standard&quot;;
+          i = (window.screen.height === 568) ? &quot;5&quot; : i;
+          i = (window.screen.height === 667) ? &quot;6&quot; : i;
+          o = window.matchMedia(&quot;(-webkit-min-device-pixel-ratio: 3)&quot;).matches &amp;&amp; i === &quot;6&quot; ? &quot;zoomed&quot; : o;
+          i = window.matchMedia(&quot;(-webkit-min-device-pixel-ratio: 3)&quot;).matches ? &quot;6+&quot; : i;
+          this.isiPhone = {
+            series: &quot;iPhone&quot;,
+            model: i,
+            displayZoom: o
+          }
+        } else {
+          if ((m.match(/Android/i)) || m.match(/HTC_Sensation/i)) {
+            this.isAndroidDevice = true;
+            if (m.match(/Android 3[\.\d]+/i)) {
+              this.isAndroid3Tablet = true;
+              this.isAndroidTablet = true
+            } else {
+              if (!m.match(/mobile/i)) {
+                this.isAndroidTablet = true
+              } else {
+                if (m.match(/Android 2\.3/i)) {
+                  this.isAndroid23Device = true
+                } else {
+                  if (m.match(/Android 4\.0/i)) {
+                    this.isAndroid400 = true
+                  } else {
+                    if (m.match(/Android 4\.1/i)) {
+                      this.isAndroid410 = true
+                    } else {
+                      if (m.match(/Android 4\.2/i)) {
+                        this.isAndroid420 = true
+                      } else {
+                        if (m.match(/Android 4\.3/i)) {
+                          this.isAndroid430 = true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          } else {
+            this.isDesktop = true
+          }
+        }
+      }
+    }
+    this.isiPhoneIOS7 = (m.indexOf(&quot;IEMobile&quot;) &lt; 0) &amp;&amp; (/(?:OS\s*[7]+_0(?:_\d+)?\s*)/i.test(m) &amp;&amp; !window.navigator.standalone) &amp;&amp; (this.isiPhone || this.isiPod) &amp;&amp; this.isSafari;
+    this.isiPhoneIOS8 = (/OS\s*8_/i.test(m) &amp;&amp; !window.navigator.standalone) &amp;&amp; this.isiPhone &amp;&amp; this.isSafari;
+    this.isiPhoneIOS9 = (/OS\s*9_/i.test(m) &amp;&amp; !window.navigator.standalone) &amp;&amp; this.isiPhone &amp;&amp; this.isSafari;
+    this.isiOS9 = (/OS\s*9_/i.test(m));
+    this.isIphone4Or4s = this.isiPhone &amp;&amp; window.matchMedia(&quot;(-webkit-min-device-pixel-ratio: 2)&quot;).matches &amp;&amp; window.screen.width === 320 &amp;&amp; window.screen.height === 480;
+    this.isIphone5Or5sOr5c = this.isiPhone &amp;&amp; window.screen.width === 320 &amp;&amp; window.screen.height === 568;
+    var l = document.getElementsByTagName(&quot;meta&quot;),
+      k = l.length;
+    var j;
+    for (var p = 0; p &lt; k; p++) {
+      if (l[p].getAttribute(&quot;name&quot;) === &quot;viewport&quot;) {
+        j = l[p]
+      }
+    }
+    if ((m.match(/GT-I9100/))) {
+      this.isSamsungS = {
+        series: &quot;samsungS&quot;,
+        model: &quot;s2&quot;
+      }
+    } else {
+      if ((m.match(/GT-I9300/))) {
+        this.isSamsungS = {
+          series: &quot;samsungS&quot;,
+          model: &quot;s3&quot;
+        }
+      } else {
+        if ((m.match(/GT-I9505/)) || (m.match(/GT-I9506/)) || (m.match(/GT-I9521/)) || (m.match(/GT-I9525/))) {
+          this.isSamsungS = {
+            series: &quot;samsungS&quot;,
+            model: &quot;s4&quot;
+          }
+        }
+      }
+    }
+    if (j) {
+      if (this.isAndroidDevice &amp;&amp; !this.isChrome) {
+        this.useLegacyScaling = true
+      } else {
+        var n = &quot;width=device-width,height = device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no&quot;;
+        if (this.isSafari) {
+          n += &quot;, minimal-ui&quot;
+        }
+        j.content = n
+      }
+    }
+    this.isiOSDevice = this.isiPad || this.isiPhone || this.isiPod;
+    this.isIphone3GS = (this.isiOSDevice &amp;&amp; !window.matchMedia(&quot;(-webkit-min-device-pixel-ratio: 2)&quot;).matches &amp;&amp; window.screen.width === 320 &amp;&amp; window.screen.height === 480);
+    this.isTouchDevice = !!(&quot;ontouchstart&quot; in window);
+    this.clickEvent = this.isTouchDevice ? &quot;touchend&quot; : &quot;click&quot;;
+    this.touchstartEvent = this.isTouchDevice ? &quot;touchstart&quot; : &quot;mousedown&quot;;
+    this.touchendEvent = this.isTouchDevice ? &quot;touchend&quot; : &quot;mouseup&quot;;
+    this.touchoutEvent = &quot;mouseout&quot;;
+    this.touchmoveEvent = this.isTouchDevice ? &quot;touchmove&quot; : &quot;mousemove&quot;;
+    this.isInIFrame = (window !== window.parent)
+  }
+  has3DTransforms() {
+    var b = document,
+      a = b.createElement(&quot;div&quot;),
+      c = false,
+      d;
+    if (a.style.webkitPerspective !== undefined) {
+      d = b.createElement(&quot;style&quot;);
+      d.textContent = &quot;@media (-webkit-transform-3d){#test3d{height:3px}}&quot;;
+      b.getElementsByTagName(&quot;head&quot;)[0].appendChild(d);
+      a.id = &quot;test3d&quot;;
+      if (b.body) {
+        b.body.appendChild(a);
+        c = a.offsetHeight === 3;
+        d.parentNode.removeChild(d);
+        a.parentNode.removeChild(a)
+      }
+    }
+    return c
+  }
+}
+export default Device
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "name": "pgf-model",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-register": "^6.16.3",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.0",
+    "esdoc": "^0.4.8",
+    "mocha": "^3.1.2",
+    "watchify": "^3.7.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha --compilers js:babel-register test/**/*.js",
+    "build-js-babel": "babel source/ --out-dir public/",
+    "build": "npm run build-js-babel && npm test",
+    "watch": "node_modules/.bin/watchify %npm_package_config_source%/app.js -o %npm_package_config_dest%/app.js -v -t [ babelify ] -d",
+    "docs": "node_modules/.bin/esdoc -c ./esdoc.json",
+    "svn-add" : "svn add --force * --auto-props --parents --depth infinity -q"
+  },
+  "config": {
+    "source": "source",
+    "dest": "public"
+  },
+  "author": "Vitalie Jerebnii",
+  "license": "ISC"
+}

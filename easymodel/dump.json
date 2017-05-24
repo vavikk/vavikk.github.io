@@ -1,0 +1,3794 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/app.js",
+    "memberof": null,
+    "longname": "source/app.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 2,
+    "content": "\nimport Request from \"./request\"\n\nlet request  = new Request()\nrequest.get(\"./test/assets/countries.json\")\n.then(\n  data => console.log(data)\n)\nlet postData = {\n  username: \"vitalietest300@test.com\",\n  password: \"Qa!123456\",\n  clientapp:  \"WebCasino-DEV\",\n  force_logout: \"1\"\n}\n\n\n// request.post(\n//            \"https://pstest-webservices.palainteractive.com/authentication/login?\",\n//            postData\n//            //\"username=vitalietest300%40test.com&password=Qa!123456&clientapp=WebCasino-DEV&force_logout=1\"\n//          )\n//          .then(\n//            data => {\n//              console.log( \"Data is an object\", data )\n//             //  let {images,frames,animations,texturepacker } = data\n//             //  console.log(images)\n//            }\n//           )\n\n\n\n// import channel from \"./channels\"\n//\n// let ch1 = channel.getChannel(\"Zuum\")\n//  ch1.subscribe(\"ModalWindow/open\", message)\n//\n//  ch1.publish('ModalWindow/open', {responsive:true, title: \"My Modal Title\"}) // will call the message function\n//\n//  function message(key, value) {\n//    console.log(\"channels\", key, value)\n//  }\n\n// testing models defaults\n// import Model from './model'\n//\n// class DefaultModel extends Model {}\n// let defaultModel = new DefaultModel({\n//   id: 10,\n//   20: 20\n//\n// });\n//\n// console.log(defaultModel.get(\"20\"))\n"
+  },
+  {
+    "__docId__": 1,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "request",
+    "memberof": "source/app.js",
+    "longname": "source/app.js~request",
+    "access": null,
+    "export": false,
+    "importPath": "pgf-model/source/app.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "source/request.js~Request"
+      ]
+    }
+  },
+  {
+    "__docId__": 2,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "postData",
+    "memberof": "source/app.js",
+    "longname": "source/app.js~postData",
+    "access": null,
+    "export": false,
+    "importPath": "pgf-model/source/app.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 3,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/auth.js",
+    "memberof": null,
+    "longname": "source/auth.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 2,
+    "content": "/** A module for getting the gameId and sessionId of a game */\r\nclass Auth {\r\n  /**\r\n  * getGameInfo\r\n  * .then( function(data) {} )\r\n  * @return {Promise} returns a promise\r\n  * @example\r\n  * // Set a model with a string key and string as value\r\n  * let auth = new Auth()\r\n  * auth.getGameInfo()\r\n  * .then(\r\n  *   function(data) {\r\n  *     let {sessionId, gameId}  = data\r\n  *     console.log(\"Data is an object\", data)\r\n  *     // Ex: Data is an object Object {sessionId: \"0c027b55-7ed3-42e7-902f-859374a75fd9\", gameId: 286173}\r\n  *     console.log(\"The session id is: \", sessionId)\r\n  *     // Ex: The session id is:  0c027b55-7ed3-42e7-902f-859374a75fd9\r\n  *     callAfunction(sessionId, gameId) // calls a function with this params\r\n  *   }\r\n  * )\r\n  */\r\n  getGameInfo() {\r\n    return  this._post(\r\n        \"https://pstest-webservices.palainteractive.com/authentication/login\",\r\n        \"username=vitalietest300%40test.com&password=Qa!123456&clientapp=WebCasino-DEV&force_logout=1\"\r\n      )\r\n      .then((response) => {\r\n        let sessionToken = response.payload.sessionToken;\r\n        return this._post(\r\n          \"https://pstest-webservices.palainteractive.com/games/launch-by-game-type\",\r\n          \"customer_id=18000&session_token=\"+ sessionToken + \"&game_type_id=111&chip_type=play\"\r\n        )\r\n      })\r\n      .then((response) => {\r\n        let gameInfo = {\r\n          sessionId: response.payload.sessionId,\r\n          gameId   : response.payload.gameId\r\n        }\r\n        return gameInfo\r\n      })\r\n      .catch((err) => {\r\n        console.log(err);\r\n      })\r\n  }\r\n  _post(_url, _data) {\r\n    return new Promise(function(resolve, reject){\r\n      let request = new XMLHttpRequest();\r\n      request.onreadystatechange = function() {\r\n        if(request.readyState === 4) {\r\n          if(request.status === 200) {\r\n            let response =  JSON.parse(request.response);\r\n            resolve(response);\r\n          } else {\r\n            reject((Error(request.statusText)))\r\n          }\r\n        }\r\n      };\r\n      var url = _url\r\n      var data = _data\r\n      request.open('POST', url);\r\n      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')\r\n      request.send(data);\r\n    });\r\n  }\r\n}\r\nexport default Auth\r\n"
+  },
+  {
+    "__docId__": 4,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Auth",
+    "memberof": "source/auth.js",
+    "longname": "source/auth.js~Auth",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/auth.js",
+    "importStyle": "Auth",
+    "description": "A module for getting the gameId and sessionId of a game",
+    "lineNumber": 2,
+    "interface": false
+  },
+  {
+    "__docId__": 5,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "getGameInfo",
+    "memberof": "source/auth.js~Auth",
+    "longname": "source/auth.js~Auth#getGameInfo",
+    "access": null,
+    "description": "getGameInfo\n.then( function(data) {} )",
+    "examples": [
+      "// Set a model with a string key and string as value\nlet auth = new Auth()\nauth.getGameInfo()\n.then(\n  function(data) {\n    let {sessionId, gameId}  = data\n    console.log(\"Data is an object\", data)\n    // Ex: Data is an object Object {sessionId: \"0c027b55-7ed3-42e7-902f-859374a75fd9\", gameId: 286173}\n    console.log(\"The session id is: \", sessionId)\n    // Ex: The session id is:  0c027b55-7ed3-42e7-902f-859374a75fd9\n    callAfunction(sessionId, gameId) // calls a function with this params\n  }\n)"
+    ],
+    "lineNumber": 22,
+    "params": [],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "returns a promise"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 6,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_post",
+    "memberof": "source/auth.js~Auth",
+    "longname": "source/auth.js~Auth#_post",
+    "access": null,
+    "description": null,
+    "lineNumber": 45,
+    "undocument": true,
+    "params": [
+      {
+        "name": "_url",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "_data",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 7,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/channels.js",
+    "memberof": null,
+    "longname": "source/channels.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import { isUndefined } from './utils'\r\nimport PubSub from './pubsub'\r\n/**\r\n*\r\n* Channel Factory\r\n* PubSub singeltons generator\r\n* @example\r\n* let ch1 = channel.getChannel(\"ModalWindow\")\r\n*\r\n* ch1.subscribe(\"ModalWindow/open\", message)\r\n*\r\n* ch1.publish('ModalWindow/open', {responsive:true, title: \"My Modal Title\"}) // will call the message function\r\n*\r\n* function message(key, value) {\r\n*   console.log( key, value) // ModalWindow/open Object {responsive: true, title: \"My Modal Title\"}\r\n* }\r\n*/\r\nclass ChannelFactory {\r\n  constructor() {\r\n    this._channels = new Map()\r\n  }\r\n  /**\r\n  * Returns a channel instance as a singelton,\r\n  * if the instance is missing it will create it.\r\n  *\r\n  *\r\n  * @param {string} name - channel name\r\n  * @return {Object} returns the pubsub instance\r\n  * @example\r\n  * // Create and get a new channel\r\n  * let ch1 = channel.getChannel(\"ModalWindow\")\r\n  *\r\n  * ch1.subscribe(\"ModalWindow/open\", message)\r\n  *\r\n  * ch1.publish('ModalWindow/open', {responsive:true, title: \"My Modal Title\"}) // will call the message function\r\n  *\r\n  * function message(key, value) {\r\n  *   console.log(\"channels\", key, value)\r\n  * }\r\n  */\r\n  getChannel(name) {\r\n    if(!this._channels.has(name)) {\r\n      this._create(name)\r\n    }\r\n    return this._channels.get(name)\r\n  }\r\n  _create(name) {\r\n    const ps = new PubSub()\r\n    this._channels.set(name, ps)\r\n    return ps\r\n  }\r\n}\r\nexport default new ChannelFactory()\r\n"
+  },
+  {
+    "__docId__": 8,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "ChannelFactory",
+    "memberof": "source/channels.js",
+    "longname": "source/channels.js~ChannelFactory",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/channels.js",
+    "importStyle": null,
+    "description": "\nChannel Factory\nPubSub singeltons generator",
+    "examples": [
+      "let ch1 = channel.getChannel(\"ModalWindow\")\n\nch1.subscribe(\"ModalWindow/open\", message)\n\nch1.publish('ModalWindow/open', {responsive:true, title: \"My Modal Title\"}) // will call the message function\n\nfunction message(key, value) {\n  console.log( key, value) // ModalWindow/open Object {responsive: true, title: \"My Modal Title\"}\n}"
+    ],
+    "lineNumber": 18,
+    "pseudoExport": true,
+    "interface": false
+  },
+  {
+    "__docId__": 9,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "source/channels.js~ChannelFactory",
+    "longname": "source/channels.js~ChannelFactory#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 10,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "_channels",
+    "memberof": "source/channels.js~ChannelFactory",
+    "longname": "source/channels.js~ChannelFactory#_channels",
+    "access": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 11,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "getChannel",
+    "memberof": "source/channels.js~ChannelFactory",
+    "longname": "source/channels.js~ChannelFactory#getChannel",
+    "access": null,
+    "description": "Returns a channel instance as a singelton,\nif the instance is missing it will create it.",
+    "examples": [
+      "// Create and get a new channel\nlet ch1 = channel.getChannel(\"ModalWindow\")\n\nch1.subscribe(\"ModalWindow/open\", message)\n\nch1.publish('ModalWindow/open', {responsive:true, title: \"My Modal Title\"}) // will call the message function\n\nfunction message(key, value) {\n  console.log(\"channels\", key, value)\n}"
+    ],
+    "lineNumber": 41,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "name",
+        "description": "channel name"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "returns the pubsub instance"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 12,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_create",
+    "memberof": "source/channels.js~ChannelFactory",
+    "longname": "source/channels.js~ChannelFactory#_create",
+    "access": null,
+    "description": null,
+    "lineNumber": 47,
+    "undocument": true,
+    "params": [
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 13,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "channelFactory",
+    "memberof": "source/channels.js",
+    "longname": "source/channels.js~channelFactory",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/channels.js",
+    "importStyle": "channelFactory",
+    "description": null,
+    "lineNumber": 53,
+    "undocument": true,
+    "type": {
+      "types": [
+        "source/channels.js~ChannelFactory"
+      ]
+    }
+  },
+  {
+    "__docId__": 14,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/deviceInfo.js",
+    "memberof": null,
+    "longname": "source/deviceInfo.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "class Device {\r\n  constructor() {\r\n    this.isiPad = false;\r\n    this.isiPhone = false;\r\n    this.isiPhoneIOS7 = false;\r\n    this.isiPhoneIOS8 = false;\r\n    this.isiPhoneIOS9 = false;\r\n    this.isiPod = false;\r\n    this.isAndroidDevice = false;\r\n    this.isSamsungS = false;\r\n    this.isOneX = false;\r\n    this.isHTCOne = false;\r\n    this.isAndroid23Device = false;\r\n    this.isAndroid400 = false;\r\n    this.isAndroid410 = false;\r\n    this.isAndroidTablet = false;\r\n    this.isAndroid3Tablet = false;\r\n    this.isDesktop = false;\r\n    this.has3DTransforms = this.has3DTransforms()\r\n    this.useLegacyScaling = false;\r\n    this.isChrome = false;\r\n    this.isChrome280 = false;\r\n    this.isSafari = false;\r\n    this.isChromeForIOS = false;\r\n    this._detectDevice()\r\n  }\r\n  detectDevice() {\r\n    throw new Error(\"detectDevice is private method\")\r\n  }\r\n  _detectDevice() {\r\n    var m = navigator.userAgent;\r\n    if (m.match(/Chrome/i)) {\r\n      this.isChrome = true;\r\n      if (m.match(/Chrome\\/28[\\.\\d]/i)) {\r\n        this.isChrome280 = true\r\n      }\r\n    }\r\n    if (m.match(/CriOS/i)) {\r\n      this.isChromeForIOS = true\r\n    }\r\n    if (m.match(/Safari/i) && !this.isChromeForIOS) {\r\n      this.isSafari = true\r\n    }\r\n    if (m.match(/iPad/i) !== null) {\r\n      this.isiPad = true\r\n    } else {\r\n      if ((m.match(/iPod/i))) {\r\n        this.isiPod = true\r\n      } else {\r\n        if ((m.match(/iPhone/i))) {\r\n          var i = \"3gs,4,4s\",\r\n            o = \"standard\";\r\n          i = (window.screen.height === 568) ? \"5\" : i;\r\n          i = (window.screen.height === 667) ? \"6\" : i;\r\n          o = window.matchMedia(\"(-webkit-min-device-pixel-ratio: 3)\").matches && i === \"6\" ? \"zoomed\" : o;\r\n          i = window.matchMedia(\"(-webkit-min-device-pixel-ratio: 3)\").matches ? \"6+\" : i;\r\n          this.isiPhone = {\r\n            series: \"iPhone\",\r\n            model: i,\r\n            displayZoom: o\r\n          }\r\n        } else {\r\n          if ((m.match(/Android/i)) || m.match(/HTC_Sensation/i)) {\r\n            this.isAndroidDevice = true;\r\n            if (m.match(/Android 3[\\.\\d]+/i)) {\r\n              this.isAndroid3Tablet = true;\r\n              this.isAndroidTablet = true\r\n            } else {\r\n              if (!m.match(/mobile/i)) {\r\n                this.isAndroidTablet = true\r\n              } else {\r\n                if (m.match(/Android 2\\.3/i)) {\r\n                  this.isAndroid23Device = true\r\n                } else {\r\n                  if (m.match(/Android 4\\.0/i)) {\r\n                    this.isAndroid400 = true\r\n                  } else {\r\n                    if (m.match(/Android 4\\.1/i)) {\r\n                      this.isAndroid410 = true\r\n                    } else {\r\n                      if (m.match(/Android 4\\.2/i)) {\r\n                        this.isAndroid420 = true\r\n                      } else {\r\n                        if (m.match(/Android 4\\.3/i)) {\r\n                          this.isAndroid430 = true\r\n                        }\r\n                      }\r\n                    }\r\n                  }\r\n                }\r\n              }\r\n            }\r\n          } else {\r\n            this.isDesktop = true\r\n          }\r\n        }\r\n      }\r\n    }\r\n    this.isiPhoneIOS7 = (m.indexOf(\"IEMobile\") < 0) && (/(?:OS\\s*[7]+_0(?:_\\d+)?\\s*)/i.test(m) && !window.navigator.standalone) && (this.isiPhone || this.isiPod) && this.isSafari;\r\n    this.isiPhoneIOS8 = (/OS\\s*8_/i.test(m) && !window.navigator.standalone) && this.isiPhone && this.isSafari;\r\n    this.isiPhoneIOS9 = (/OS\\s*9_/i.test(m) && !window.navigator.standalone) && this.isiPhone && this.isSafari;\r\n    this.isiOS9 = (/OS\\s*9_/i.test(m));\r\n    this.isIphone4Or4s = this.isiPhone && window.matchMedia(\"(-webkit-min-device-pixel-ratio: 2)\").matches && window.screen.width === 320 && window.screen.height === 480;\r\n    this.isIphone5Or5sOr5c = this.isiPhone && window.screen.width === 320 && window.screen.height === 568;\r\n    var l = document.getElementsByTagName(\"meta\"),\r\n      k = l.length;\r\n    var j;\r\n    for (var p = 0; p < k; p++) {\r\n      if (l[p].getAttribute(\"name\") === \"viewport\") {\r\n        j = l[p]\r\n      }\r\n    }\r\n    if ((m.match(/GT-I9100/))) {\r\n      this.isSamsungS = {\r\n        series: \"samsungS\",\r\n        model: \"s2\"\r\n      }\r\n    } else {\r\n      if ((m.match(/GT-I9300/))) {\r\n        this.isSamsungS = {\r\n          series: \"samsungS\",\r\n          model: \"s3\"\r\n        }\r\n      } else {\r\n        if ((m.match(/GT-I9505/)) || (m.match(/GT-I9506/)) || (m.match(/GT-I9521/)) || (m.match(/GT-I9525/))) {\r\n          this.isSamsungS = {\r\n            series: \"samsungS\",\r\n            model: \"s4\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n    if (j) {\r\n      if (this.isAndroidDevice && !this.isChrome) {\r\n        this.useLegacyScaling = true\r\n      } else {\r\n        var n = \"width=device-width,height = device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no\";\r\n        if (this.isSafari) {\r\n          n += \", minimal-ui\"\r\n        }\r\n        j.content = n\r\n      }\r\n    }\r\n    this.isiOSDevice = this.isiPad || this.isiPhone || this.isiPod;\r\n    this.isIphone3GS = (this.isiOSDevice && !window.matchMedia(\"(-webkit-min-device-pixel-ratio: 2)\").matches && window.screen.width === 320 && window.screen.height === 480);\r\n    this.isTouchDevice = !!(\"ontouchstart\" in window);\r\n    this.clickEvent = this.isTouchDevice ? \"touchend\" : \"click\";\r\n    this.touchstartEvent = this.isTouchDevice ? \"touchstart\" : \"mousedown\";\r\n    this.touchendEvent = this.isTouchDevice ? \"touchend\" : \"mouseup\";\r\n    this.touchoutEvent = \"mouseout\";\r\n    this.touchmoveEvent = this.isTouchDevice ? \"touchmove\" : \"mousemove\";\r\n    this.isInIFrame = (window !== window.parent)\r\n  }\r\n  has3DTransforms() {\r\n    var b = document,\r\n      a = b.createElement(\"div\"),\r\n      c = false,\r\n      d;\r\n    if (a.style.webkitPerspective !== undefined) {\r\n      d = b.createElement(\"style\");\r\n      d.textContent = \"@media (-webkit-transform-3d){#test3d{height:3px}}\";\r\n      b.getElementsByTagName(\"head\")[0].appendChild(d);\r\n      a.id = \"test3d\";\r\n      if (b.body) {\r\n        b.body.appendChild(a);\r\n        c = a.offsetHeight === 3;\r\n        d.parentNode.removeChild(d);\r\n        a.parentNode.removeChild(a)\r\n      }\r\n    }\r\n    return c\r\n  }\r\n}\r\nexport default Device\r\n"
+  },
+  {
+    "__docId__": 15,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Device",
+    "memberof": "source/deviceInfo.js",
+    "longname": "source/deviceInfo.js~Device",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/deviceInfo.js",
+    "importStyle": "Device",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 16,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 17,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPad",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPad",
+    "access": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 18,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPhone",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPhone",
+    "access": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 19,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPhoneIOS7",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPhoneIOS7",
+    "access": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 20,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPhoneIOS8",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPhoneIOS8",
+    "access": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 21,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPhoneIOS9",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPhoneIOS9",
+    "access": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 22,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPod",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPod",
+    "access": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 23,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroidDevice",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroidDevice",
+    "access": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 24,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isSamsungS",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isSamsungS",
+    "access": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 25,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isOneX",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isOneX",
+    "access": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 26,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isHTCOne",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isHTCOne",
+    "access": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 27,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid23Device",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid23Device",
+    "access": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 28,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid400",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid400",
+    "access": null,
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 29,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid410",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid410",
+    "access": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 30,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroidTablet",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroidTablet",
+    "access": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 31,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid3Tablet",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid3Tablet",
+    "access": null,
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 32,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isDesktop",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isDesktop",
+    "access": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 33,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "has3DTransforms",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#has3DTransforms",
+    "access": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 34,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "useLegacyScaling",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#useLegacyScaling",
+    "access": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 35,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isChrome",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isChrome",
+    "access": null,
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 36,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isChrome280",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isChrome280",
+    "access": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 37,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isSafari",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isSafari",
+    "access": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 38,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isChromeForIOS",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isChromeForIOS",
+    "access": null,
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 39,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "detectDevice",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#detectDevice",
+    "access": null,
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 40,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_detectDevice",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#_detectDevice",
+    "access": null,
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 41,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isChrome",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isChrome",
+    "access": null,
+    "description": null,
+    "lineNumber": 33,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 42,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isChrome280",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isChrome280",
+    "access": null,
+    "description": null,
+    "lineNumber": 35,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 43,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isChromeForIOS",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isChromeForIOS",
+    "access": null,
+    "description": null,
+    "lineNumber": 39,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 44,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isSafari",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isSafari",
+    "access": null,
+    "description": null,
+    "lineNumber": 42,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 45,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPad",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPad",
+    "access": null,
+    "description": null,
+    "lineNumber": 45,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 46,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPod",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPod",
+    "access": null,
+    "description": null,
+    "lineNumber": 48,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 47,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPhone",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPhone",
+    "access": null,
+    "description": null,
+    "lineNumber": 57,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 48,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroidDevice",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroidDevice",
+    "access": null,
+    "description": null,
+    "lineNumber": 64,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 49,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid3Tablet",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid3Tablet",
+    "access": null,
+    "description": null,
+    "lineNumber": 66,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroidTablet",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroidTablet",
+    "access": null,
+    "description": null,
+    "lineNumber": 67,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 51,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroidTablet",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroidTablet",
+    "access": null,
+    "description": null,
+    "lineNumber": 70,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid23Device",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid23Device",
+    "access": null,
+    "description": null,
+    "lineNumber": 73,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid400",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid400",
+    "access": null,
+    "description": null,
+    "lineNumber": 76,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid410",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid410",
+    "access": null,
+    "description": null,
+    "lineNumber": 79,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid420",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid420",
+    "access": null,
+    "description": null,
+    "lineNumber": 82,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 56,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isAndroid430",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isAndroid430",
+    "access": null,
+    "description": null,
+    "lineNumber": 85,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 57,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isDesktop",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isDesktop",
+    "access": null,
+    "description": null,
+    "lineNumber": 94,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 58,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPhoneIOS7",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPhoneIOS7",
+    "access": null,
+    "description": null,
+    "lineNumber": 99,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 59,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPhoneIOS8",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPhoneIOS8",
+    "access": null,
+    "description": null,
+    "lineNumber": 100,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiPhoneIOS9",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiPhoneIOS9",
+    "access": null,
+    "description": null,
+    "lineNumber": 101,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 61,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiOS9",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiOS9",
+    "access": null,
+    "description": null,
+    "lineNumber": 102,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isIphone4Or4s",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isIphone4Or4s",
+    "access": null,
+    "description": null,
+    "lineNumber": 103,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isIphone5Or5sOr5c",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isIphone5Or5sOr5c",
+    "access": null,
+    "description": null,
+    "lineNumber": 104,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isSamsungS",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isSamsungS",
+    "access": null,
+    "description": null,
+    "lineNumber": 114,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isSamsungS",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isSamsungS",
+    "access": null,
+    "description": null,
+    "lineNumber": 120,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isSamsungS",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isSamsungS",
+    "access": null,
+    "description": null,
+    "lineNumber": 126,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "useLegacyScaling",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#useLegacyScaling",
+    "access": null,
+    "description": null,
+    "lineNumber": 135,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isiOSDevice",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isiOSDevice",
+    "access": null,
+    "description": null,
+    "lineNumber": 144,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isIphone3GS",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isIphone3GS",
+    "access": null,
+    "description": null,
+    "lineNumber": 145,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isTouchDevice",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isTouchDevice",
+    "access": null,
+    "description": null,
+    "lineNumber": 146,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 71,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "clickEvent",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#clickEvent",
+    "access": null,
+    "description": null,
+    "lineNumber": 147,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "touchstartEvent",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#touchstartEvent",
+    "access": null,
+    "description": null,
+    "lineNumber": 148,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 73,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "touchendEvent",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#touchendEvent",
+    "access": null,
+    "description": null,
+    "lineNumber": 149,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 74,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "touchoutEvent",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#touchoutEvent",
+    "access": null,
+    "description": null,
+    "lineNumber": 150,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 75,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "touchmoveEvent",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#touchmoveEvent",
+    "access": null,
+    "description": null,
+    "lineNumber": 151,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "isInIFrame",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#isInIFrame",
+    "access": null,
+    "description": null,
+    "lineNumber": 152,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "has3DTransforms",
+    "memberof": "source/deviceInfo.js~Device",
+    "longname": "source/deviceInfo.js~Device#has3DTransforms",
+    "access": null,
+    "description": null,
+    "lineNumber": 154,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 78,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/es6examples.js",
+    "memberof": null,
+    "longname": "source/es6examples.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 43,
+    "content": "\r\n// // IIFE\r\n// (() => {\r\n//   console.log(\"Self invoked \")\r\n// })(); //always terminate with ;\r\n// // i like this one\r\n// const  arrowIlike = x => x + 2 < 10 ? true : false\r\n// console.log(arrowIlike(2))\r\n//\r\n// // Object Literals\r\n// const dynamicMethod =  \"theMethod\"\r\n// const obj = {\r\n//   myMethod(x) {\r\n//     console.log(\"Object literal\", x)\r\n//   },\r\n//   [dynamicMethod] () {\r\n//     return \"HI\"\r\n//   }\r\n// }\r\n// obj.myMethod(2)\r\n// console.log(obj.theMethod())\r\n// // shorthand\r\n// const first = \"Vitalie\"\r\n// const last = \"Jerebnii\"\r\n// const obj1 = {first, last}\r\n// console.log(obj1)\r\n//\r\n// // assign\r\n// const obj2 = { foo: 123 };\r\n// Object.assign(obj2, { bar: true });\r\n// console.log(JSON.stringify(obj2)); //{\"foo\":123,\"bar\":true}\r\n//\r\n// class Point {\r\n//   constructor(x, y) {\r\n//       Object.assign(this, {x, y}); // => this.x = x, this.y = y\r\n//   }\r\n// }\r\n// // destructing\r\n// console.log(\"Distructing\")\r\n// const info = {x:1, y:2}\r\n// const {x,y} = info\r\n// console.log(x,\"Is from info obj\")\r\n"
+  },
+  {
+    "__docId__": 79,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/listenTo.js",
+    "memberof": null,
+    "longname": "source/listenTo.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "\"use strict\"\r\nimport { isUndefined } from './utils.js'\r\n/**\r\n* listenTo\r\n* Listens for a model change and fires the callback function\r\n* @param {model} model - model\r\n* @param {string} action - the key/symbol of a model\r\n* @param {function} func - the callback/ function triggered by model change\r\n* @example\r\n* // Listening for a model change\r\n* let myModel = new Model()\r\n*\r\n* listenTo(myModel, \"name\", myFunction)\r\n*\r\n* myModel.set(\"name\", \"Vitalie\") // The model was changed  name Vitalie\r\n* myModel.set(\"name\", \"Dan\") // The model was changed  name Dan\r\n*\r\n* function myFunction(key, value) {\r\n*   console.log(\"The model was changed \", key, value )\r\n* }\r\n*/\r\nexport function listenTo(model, action, func) {\r\n  if(isUndefined(model)) {\r\n    throw new Error(\"model is undefined\")\r\n    return false\r\n  }\r\n  if(isUndefined(action)) {\r\n    throw new Error(\"action is undefined\")\r\n    return false\r\n  }\r\n  if(isUndefined(func)) {\r\n    throw new Error(\"func is undefined\")\r\n    return false\r\n  }\r\n  model.pubsub.subscribe(action, func)\r\n}\r\n"
+  },
+  {
+    "__docId__": 80,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "listenTo",
+    "memberof": "source/listenTo.js",
+    "longname": "source/listenTo.js~listenTo",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/listenTo.js",
+    "importStyle": "{listenTo}",
+    "description": "listenTo\nListens for a model change and fires the callback function",
+    "examples": [
+      "// Listening for a model change\nlet myModel = new Model()\n\nlistenTo(myModel, \"name\", myFunction)\n\nmyModel.set(\"name\", \"Vitalie\") // The model was changed  name Vitalie\nmyModel.set(\"name\", \"Dan\") // The model was changed  name Dan\n\nfunction myFunction(key, value) {\n  console.log(\"The model was changed \", key, value )\n}"
+    ],
+    "lineNumber": 22,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "model"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "model",
+        "description": "model"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "action",
+        "description": "the key/symbol of a model"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "func",
+        "description": "the callback/ function triggered by model change"
+      }
+    ],
+    "return": {
+      "types": [
+        "boolean"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 81,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/model.js",
+    "memberof": null,
+    "longname": "source/model.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import { isUndefined, isEqual, isObject } from './utils.js'\r\nimport PubSub from './pubsub.js'\r\nconst map = new Map()\r\n/** Model with pubsub functionality  */\r\nclass Model {\r\n  /**\r\n   * @param {Object} [defaults] - default arguments for the model.\r\n   * @example\r\n   * // Set a model with a string key and string as value\r\n   * let model = new Model({id: 10})\r\n   * console.log(model.get(\"id\")) //10\r\n   *\r\n   * Warning:  pasing arguments to contructor(defaults) will not fire events\r\n  */\r\n  constructor(defaults = null) {\r\n    this._pubsub = new PubSub()\r\n    if(arguments.length > 1) throw new Error(`Passing more than one argument to the contructor, expected 1 got ${arguments.length}`)\r\n    if(defaults && !isObject(defaults)) throw new Error(`Argument should be Object, got ${typeof defaults}`)\r\n    if(defaults) this.set(defaults, undefined, { silent: true })\r\n  }\r\n  /**\r\n  * Returns the pubsub instance\r\n  */\r\n  get pubsub() {\r\n    return this._pubsub\r\n  }\r\n  /**\r\n  * Model set.\r\n  * @param {(string|Object)} key - key can be string or {}.\r\n  * @param {(string|Object)} [value] - value can be string or {}, not used if the key is an {}.\r\n  * @param {Object} [options] - model options.\r\n  * @example\r\n  * // Set a model with a string key and string as value\r\n  * model.set(\"name\", \"Vitalie\")\r\n  * @example\r\n  * // Set a model with a string key and object as value\r\n  * model.set(\"person\", {\r\n  *   firstName: \"Vitalie\",\r\n  *   lastName: \"Jerebnii\"\r\n  * })\r\n  * @example\r\n  * // Set a model with an object and mixed values\r\n  * model.set({\r\n  *   id: 10,\r\n  *   person: {\r\n  *     firstName: \"Vitalie\",\r\n  *     lastName: \"Jerebnii\"\r\n  *   }\r\n  * })\r\n  * @example\r\n  * // Set a model without dispatching an event (silent mode)\r\n  * model.set(\"name\", \"Vitalie\", {silent: true})\r\n  */\r\n  set(key, value, options) {\r\n    if(isUndefined(key)) {\r\n      throw new Error(\"Key is undefined\")\r\n      return false\r\n    }\r\n    if(!isObject(key) && !isUndefined(value)) {\r\n      this._setSingleKey(key, value, options)\r\n    } else {\r\n      this._objToStrMap(key)\r\n    }\r\n  }\r\n  /**\r\n  * Model get.\r\n  * @param {(string)} key - model key.\r\n  * @return {string|Object} The model value as string or object\r\n  * @example\r\n  * // Set a model with a string key and string as value\r\n  * model.set(\"name\", \"Vitalie\")\r\n  * let name = model.get(\"name\")\r\n  * console.log(name) // \"Vitalie\"\r\n  */\r\n  get(key) {\r\n    return map.get(key)\r\n  }\r\n  /**\r\n  * Set a single key with value\r\n  * @param {string} key\r\n  * @param {(string|Object)} value\r\n  */\r\n  _setSingleKey(key,value, options = {}) {\r\n    if(this._isValueChanged(key,value)) {\r\n      map.set(key, value)\r\n      if(!options.silent)\r\n        this._pubsub.publish(key, value)\r\n    }\r\n  }\r\n  /**\r\n  * Converts an object to key values\r\n  * @param {Object} key - model key.\r\n  */\r\n  _objToStrMap(obj) {\r\n    for (const key of Object.keys(obj)) {\r\n      this._setSingleKey(key,obj[key])\r\n    }\r\n    //return map;\r\n  }\r\n  /**\r\n  * Checks if the new value is differend from the old one\r\n  * @param {(string|Object)} key - key can be string or {}.\r\n  * @param {(string|Object)} [value] - value can be string or {}, not used if the key is an {}.\r\n  * @return {boolean} boolean\r\n  */\r\n  _isValueChanged(key,value) {\r\n    if(map.has(key)) {\r\n      let oldValue = map.get(key)\r\n      return  !isEqual(value, oldValue)\r\n    }\r\n    return true\r\n  }\r\n\r\n}\r\nexport default Model\r\nexport var __useDefault = true\r\n"
+  },
+  {
+    "__docId__": 82,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "map",
+    "memberof": "source/model.js",
+    "longname": "source/model.js~map",
+    "access": null,
+    "export": false,
+    "importPath": "pgf-model/source/model.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "Map"
+      ]
+    }
+  },
+  {
+    "__docId__": 83,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "__useDefault",
+    "memberof": "source/model.js",
+    "longname": "source/model.js~__useDefault",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/model.js",
+    "importStyle": "{__useDefault}",
+    "description": null,
+    "lineNumber": 116,
+    "undocument": true,
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 84,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Model",
+    "memberof": "source/model.js",
+    "longname": "source/model.js~Model",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/model.js",
+    "importStyle": "Model",
+    "description": "Model with pubsub functionality",
+    "lineNumber": 5,
+    "interface": false
+  },
+  {
+    "__docId__": 85,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "source/model.js~Model",
+    "longname": "source/model.js~Model#constructor",
+    "access": null,
+    "description": "",
+    "examples": [
+      "// Set a model with a string key and string as value\nlet model = new Model({id: 10})\nconsole.log(model.get(\"id\")) //10\n\nWarning:  pasing arguments to contructor(defaults) will not fire events"
+    ],
+    "lineNumber": 15,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "defaults",
+        "description": "default arguments for the model."
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 86,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "_pubsub",
+    "memberof": "source/model.js~Model",
+    "longname": "source/model.js~Model#_pubsub",
+    "access": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 87,
+    "kind": "get",
+    "static": false,
+    "variation": null,
+    "name": "pubsub",
+    "memberof": "source/model.js~Model",
+    "longname": "source/model.js~Model#pubsub",
+    "access": null,
+    "description": "Returns the pubsub instance",
+    "lineNumber": 24,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 88,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "set",
+    "memberof": "source/model.js~Model",
+    "longname": "source/model.js~Model#set",
+    "access": null,
+    "description": "Model set.",
+    "examples": [
+      "// Set a model with a string key and string as value\nmodel.set(\"name\", \"Vitalie\")",
+      "// Set a model with a string key and object as value\nmodel.set(\"person\", {\n  firstName: \"Vitalie\",\n  lastName: \"Jerebnii\"\n})",
+      "// Set a model with an object and mixed values\nmodel.set({\n  id: 10,\n  person: {\n    firstName: \"Vitalie\",\n    lastName: \"Jerebnii\"\n  }\n})",
+      "// Set a model without dispatching an event (silent mode)\nmodel.set(\"name\", \"Vitalie\", {silent: true})"
+    ],
+    "lineNumber": 54,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "key",
+        "description": "key can be string or {}."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "value",
+        "description": "value can be string or {}, not used if the key is an {}."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "options",
+        "description": "model options."
+      }
+    ],
+    "return": {
+      "types": [
+        "boolean"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 89,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "get",
+    "memberof": "source/model.js~Model",
+    "longname": "source/model.js~Model#get",
+    "access": null,
+    "description": "Model get.",
+    "examples": [
+      "// Set a model with a string key and string as value\nmodel.set(\"name\", \"Vitalie\")\nlet name = model.get(\"name\")\nconsole.log(name) // \"Vitalie\""
+    ],
+    "lineNumber": 75,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "key",
+        "description": "model key."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "string",
+        "Object"
+      ],
+      "spread": false,
+      "description": "The model value as string or object"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 90,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_setSingleKey",
+    "memberof": "source/model.js~Model",
+    "longname": "source/model.js~Model#_setSingleKey",
+    "access": null,
+    "description": "Set a single key with value",
+    "lineNumber": 83,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "key",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "value",
+        "description": ""
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 91,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_objToStrMap",
+    "memberof": "source/model.js~Model",
+    "longname": "source/model.js~Model#_objToStrMap",
+    "access": null,
+    "description": "Converts an object to key values",
+    "lineNumber": 94,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "key",
+        "description": "model key."
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 92,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_isValueChanged",
+    "memberof": "source/model.js~Model",
+    "longname": "source/model.js~Model#_isValueChanged",
+    "access": null,
+    "description": "Checks if the new value is differend from the old one",
+    "lineNumber": 106,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "key",
+        "description": "key can be string or {}."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string",
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "value",
+        "description": "value can be string or {}, not used if the key is an {}."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": "boolean"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 93,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/Observer.js",
+    "memberof": null,
+    "longname": "source/Observer.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "class Observer {\r\n  constructor() {\r\n    this.observers = []\r\n  }\r\n  addObserver(observer) {\r\n    this.observers.push(observer)\r\n  }\r\n  notify(data) {\r\n    this.observers.forEach( (observer) => {\r\n      observer.call(null, data)\r\n    })\r\n  }\r\n}\r\nexport default Observer\r\n"
+  },
+  {
+    "__docId__": 94,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Observer",
+    "memberof": "source/Observer.js",
+    "longname": "source/Observer.js~Observer",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/Observer.js",
+    "importStyle": "Observer",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 95,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "source/Observer.js~Observer",
+    "longname": "source/Observer.js~Observer#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 96,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "observers",
+    "memberof": "source/Observer.js~Observer",
+    "longname": "source/Observer.js~Observer#observers",
+    "access": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "addObserver",
+    "memberof": "source/Observer.js~Observer",
+    "longname": "source/Observer.js~Observer#addObserver",
+    "access": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "params": [
+      {
+        "name": "observer",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 98,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "notify",
+    "memberof": "source/Observer.js~Observer",
+    "longname": "source/Observer.js~Observer#notify",
+    "access": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "params": [
+      {
+        "name": "data",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 99,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/oldapp.js",
+    "memberof": null,
+    "longname": "source/oldapp.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Model from './model.js'\r\nimport Auth from './auth.js'\r\nimport Device from './deviceInfo.js'\r\nimport {listenTo} from './listenTo.js'\r\nimport Observer from './Observer.js'\r\n\r\nlet  backgroundImage,\r\ntreesImage, groundImage\r\n{\r\nconst v = \"FRAMEWORK VS 1.1\"\r\nconsole.log(v)\r\n}\r\n\r\nlet device = new Device()\r\n\r\nlet model = new Model()\r\n\r\nlistenTo(model, \"name\", function() {\r\n  console.log(\"JA\")\r\n})\r\n\r\nmodel.set(\"name\", \"vitalie\")\r\nmodel.set(\"name\", \"dan\", {silent: true})\r\n\r\n// // observer test\r\n// let obs = new Observer()\r\n// obs.b = 5\r\n// obs.a = 0\r\n// obs.addObserver(function(){\r\n//   if(obs.a > obs.b) {\r\n//     console.log(\"obs.a > obs.b\", obs.a,obs.b)\r\n//   } else {\r\n//     console.log(\"obs.a < obs.b\", obs.a,obs.b)\r\n//   }\r\n// })\r\n// var canvas = document.getElementById(\"demo\");\r\n// demo.addEventListener(\"click\", () => {\r\n//   console.log(\"CLICK1\")\r\n//   obs.a++\r\n//   obs.notify({\r\n//     a: obs.a\r\n//   })\r\n// }, false)\r\n\r\n//console.log(model.get(\"name\"))\r\n\r\n// let auth = new Auth()\r\n// auth.getGameInfo()\r\n// .then(\r\n//   function(data) {\r\n//     let {sessionId, gameId}  = data\r\n//     console.log(\"Data is an object\", data)\r\n//     console.log(\"The session id is: \", sessionId)\r\n//     //callAfunction(sessionId, gameId)\r\n//   }\r\n// )\r\n"
+  },
+  {
+    "__docId__": 100,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "device",
+    "memberof": "source/oldapp.js",
+    "longname": "source/oldapp.js~device",
+    "access": null,
+    "export": false,
+    "importPath": "pgf-model/source/oldapp.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "type": {
+      "types": [
+        "source/deviceInfo.js~Device"
+      ]
+    }
+  },
+  {
+    "__docId__": 101,
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "model",
+    "memberof": "source/oldapp.js",
+    "longname": "source/oldapp.js~model",
+    "access": null,
+    "export": false,
+    "importPath": "pgf-model/source/oldapp.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "type": {
+      "types": [
+        "source/model.js~Model"
+      ]
+    }
+  },
+  {
+    "__docId__": 102,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/pubsub.js",
+    "memberof": null,
+    "longname": "source/pubsub.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import {  isUndefined } from './utils.js'\r\nclass PubSub {\r\n  constructor() {\r\n    this.topics = {}\r\n    this.subUid = -1\r\n  }\r\n    // Publish or broadcast events of interest\r\n    // with a specific topic name and arguments\r\n    // such as the data to pass along\r\n  publish(topic, args) {\r\n    if (!topic in this.topics && !this.topics[topic]) {\r\n      return false\r\n    }\r\n\r\n    let subscribers = this.topics[topic],\r\n      len = subscribers ? subscribers.length : 0\r\n\r\n    while (len--) {\r\n      subscribers[len].func(topic, args)\r\n    }\r\n\r\n    return this\r\n  }\r\n\r\n  // Subscribe to events of interest\r\n  // with a specific topic name and a\r\n  // callback function, to be executed\r\n  // when the topic/event is observed\r\n  subscribe(topic, func) {\r\n\r\n    if (!this.topics[topic]) {\r\n      this.topics[topic] = []\r\n    }\r\n\r\n    var token = (++this.subUid).toString()\r\n    this.topics[topic].push({\r\n      token: token,\r\n      func: func\r\n    })\r\n    return token\r\n  }\r\n\r\n  // Unsubscribe from a specific\r\n  // topic, based on a tokenized reference\r\n  // to the subscription\r\n  unsubscribe(token) {\r\n    for (var m in this.topics) {\r\n      if (this.topics[m]) {\r\n        for (var i = 0, j = this.topics[m].length; i < j; i++) {\r\n          if (this.topics[m][i].token === token) {\r\n            this.topics[m].splice(i, 1)\r\n            return token\r\n          }\r\n        }\r\n      }\r\n    }\r\n    return this\r\n  }\r\n}\r\nexport default PubSub\r\n"
+  },
+  {
+    "__docId__": 103,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "PubSub",
+    "memberof": "source/pubsub.js",
+    "longname": "source/pubsub.js~PubSub",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/pubsub.js",
+    "importStyle": "PubSub",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 104,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "source/pubsub.js~PubSub",
+    "longname": "source/pubsub.js~PubSub#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "params": [],
+    "generator": false
+  },
+  {
+    "__docId__": 105,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "topics",
+    "memberof": "source/pubsub.js~PubSub",
+    "longname": "source/pubsub.js~PubSub#topics",
+    "access": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 106,
+    "kind": "member",
+    "static": false,
+    "variation": null,
+    "name": "subUid",
+    "memberof": "source/pubsub.js~PubSub",
+    "longname": "source/pubsub.js~PubSub#subUid",
+    "access": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 107,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "publish",
+    "memberof": "source/pubsub.js~PubSub",
+    "longname": "source/pubsub.js~PubSub#publish",
+    "access": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "params": [
+      {
+        "name": "topic",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "args",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 108,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "subscribe",
+    "memberof": "source/pubsub.js~PubSub",
+    "longname": "source/pubsub.js~PubSub#subscribe",
+    "access": null,
+    "description": null,
+    "lineNumber": 29,
+    "undocument": true,
+    "params": [
+      {
+        "name": "topic",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "func",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 109,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "unsubscribe",
+    "memberof": "source/pubsub.js~PubSub",
+    "longname": "source/pubsub.js~PubSub#unsubscribe",
+    "access": null,
+    "description": null,
+    "lineNumber": 46,
+    "undocument": true,
+    "params": [
+      {
+        "name": "token",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 110,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/request.js",
+    "memberof": null,
+    "longname": "source/request.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import { isUndefined, isObject } from './utils.js'\r\n\r\n/** Get and Post with promise */\r\nclass Request {\r\n  /**\r\n  * @param {String} url - file url.\r\n  * @return {Promise} returns a promise\r\n  * @example\r\n  * let request = new Request()\r\n  * request.get(\"public/json/myFIle.json\")\r\n  * .then(\r\n  *   data => {\r\n  *     console.log(\"Data is an object\", data)\r\n  *     callback(data) // calls a function with this params\r\n  *   }\r\n  * )\r\n  */\r\n  get(url) {\r\n    if(arguments.length !== 1) {\r\n      throw new Error(`Post requires 1 arguments, got ${arguments.length}`)\r\n      return false\r\n    }\r\n    if(typeof url !== \"string\")  {\r\n      throw new Error(`Url param should be a string, got ${typeof url}`)\r\n      return false\r\n    }\r\n\r\n    return this._request(\"GET\", url)\r\n  }\r\n  /**\r\n  * @param {String} url - file url.\r\n  * @param {(String|Object)} data - data posted, Ex. string:  data= \"?name=Vitalie\" Ex. object: data = {name:\"Vitalie\"} \r\n  * @return {Promise} returns a promise\r\n  * @example\r\n  * let request = new Request()\r\n  * request.post(\"/lobby/virtual-goods-buy-gift\", someData)\r\n  * .then(\r\n  *   data => {\r\n  *     console.log(\"Data is an object\", data)\r\n  *     callback(data) // calls a function with this params\r\n  *   }\r\n  * )\r\n  */\r\n  post(url, data) {\r\n    if(arguments.length !== 2) {\r\n      throw new Error(`Post requires 2 arguments, got ${arguments.length}`)\r\n      return false\r\n    }\r\n\r\n    if(isObject(data)) {\r\n      url += \"?\"\r\n      data = this._serialize(data)\r\n    }\r\n    return this._request(\"POST\", url, data)\r\n  }\r\n  _serialize(obj) {\r\n    let str = []\r\n    for(let p in obj)\r\n      if (obj.hasOwnProperty(p)) {\r\n        str.push(encodeURIComponent(p) + \"=\" + encodeURIComponent(obj[p]))\r\n      }\r\n    return str.join(\"&\")\r\n  }\r\n  //not used at the moment\r\n  _deepSerialize(obj, prefix) {\r\n    let str = [], p\r\n    for(p in obj) {\r\n      if (obj.hasOwnProperty(p)) {\r\n        let k = prefix ? prefix + \"[\" + p + \"]\" : p, v = obj[p]\r\n        str.push((v !== null && typeof v === \"object\") ?\r\n          serialize(v, k) :\r\n          encodeURIComponent(k) + \"=\" + encodeURIComponent(v))\r\n      }\r\n    }\r\n    return str.join(\"&\")\r\n  }\r\n  _request(requestType, url, data = \"\") {\r\n    return new Promise((resolve, reject) => {\r\n      let request = new XMLHttpRequest()\r\n      request.onreadystatechange = () => {\r\n        if(request.readyState === 4) {\r\n          if(request.status === 200) {\r\n            let response =  JSON.parse(request.response)\r\n            resolve(response)\r\n          } else {\r\n            reject((Error(request.statusText)))\r\n          }\r\n        }\r\n      }\r\n      request.open(requestType,  url, true)\r\n      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')\r\n      request.send(data)\r\n    })\r\n  }\r\n}\r\nexport default Request\r\n"
+  },
+  {
+    "__docId__": 111,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "Request",
+    "memberof": "source/request.js",
+    "longname": "source/request.js~Request",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/request.js",
+    "importStyle": "Request",
+    "description": "Get and Post with promise",
+    "lineNumber": 4,
+    "interface": false
+  },
+  {
+    "__docId__": 112,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "get",
+    "memberof": "source/request.js~Request",
+    "longname": "source/request.js~Request#get",
+    "access": null,
+    "description": "",
+    "examples": [
+      "let request = new Request()\nrequest.get(\"public/json/myFIle.json\")\n.then(\n  data => {\n    console.log(\"Data is an object\", data)\n    callback(data) // calls a function with this params\n  }\n)"
+    ],
+    "lineNumber": 18,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "url",
+        "description": "file url."
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "returns a promise"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 113,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "post",
+    "memberof": "source/request.js~Request",
+    "longname": "source/request.js~Request#post",
+    "access": null,
+    "description": "",
+    "examples": [
+      "let request = new Request()\nrequest.post(\"/lobby/virtual-goods-buy-gift\", someData)\n.then(\n  data => {\n    console.log(\"Data is an object\", data)\n    callback(data) // calls a function with this params\n  }\n)"
+    ],
+    "lineNumber": 44,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "url",
+        "description": "file url."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String",
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": "data posted, Ex. string:  data= \"?name=Vitalie\" Ex. object: data = {name:\"Vitalie\"}"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Promise"
+      ],
+      "spread": false,
+      "description": "returns a promise"
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 114,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_serialize",
+    "memberof": "source/request.js~Request",
+    "longname": "source/request.js~Request#_serialize",
+    "access": null,
+    "description": null,
+    "lineNumber": 56,
+    "undocument": true,
+    "params": [
+      {
+        "name": "obj",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 115,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_deepSerialize",
+    "memberof": "source/request.js~Request",
+    "longname": "source/request.js~Request#_deepSerialize",
+    "access": null,
+    "description": null,
+    "lineNumber": 65,
+    "undocument": true,
+    "params": [
+      {
+        "name": "obj",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "prefix",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 116,
+    "kind": "method",
+    "static": false,
+    "variation": null,
+    "name": "_request",
+    "memberof": "source/request.js~Request",
+    "longname": "source/request.js~Request#_request",
+    "access": null,
+    "description": null,
+    "lineNumber": 77,
+    "undocument": true,
+    "params": [
+      {
+        "name": "requestType",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "url",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "data",
+        "optional": true,
+        "types": [
+          "string"
+        ],
+        "defaultRaw": "",
+        "defaultValue": ""
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 117,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "source/utils.js",
+    "memberof": null,
+    "longname": "source/utils.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 2,
+    "content": "// Is a given variable undefined?\r\nexport function isUndefined(obj) {\r\n  return obj === void 0\r\n};\r\n// Is a given variable object?\r\nexport function isObject(obj) {\r\n  var type = typeof obj\r\n  return type === 'function' || type === 'object' && !!obj\r\n};\r\n\r\nexport function isEqual(x, y) {\r\n  'use strict'\r\n\r\n  if (x === null || x === undefined || y === null || y === undefined) { return x === y }\r\n  // after this just checking type of one would be enough\r\n  if (x.constructor !== y.constructor) { return false }\r\n  // if they are functions, they should exactly refer to same one (because of closures)\r\n  if (x instanceof Function) { return x === y }\r\n  // if they are regexps, they should exactly refer to same one (it is hard to better equality check on current ES)\r\n  if (x instanceof RegExp) { return x === y }\r\n  if (x === y || x.valueOf() === y.valueOf()) { return true }\r\n  if (Array.isArray(x) && x.length !== y.length) { return false }\r\n\r\n  // if they are dates, they must had equal valueOf\r\n  if (x instanceof Date) { return false }\r\n\r\n  // if they are strictly equal, they both need to be object at least\r\n  if (!(x instanceof Object)) { return false }\r\n  if (!(y instanceof Object)) { return false }\r\n\r\n  // recursive object equality check\r\n  var p = Object.keys(x)\r\n  return Object.keys(y).every(function (i) { return p.indexOf(i) !== -1 }) &&\r\n  p.every(function (i) { return isEqual(x[i], y[i]) })\r\n}\r\n"
+  },
+  {
+    "__docId__": 118,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "isUndefined",
+    "memberof": "source/utils.js",
+    "longname": "source/utils.js~isUndefined",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/utils.js",
+    "importStyle": "{isUndefined}",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "params": [
+      {
+        "name": "obj",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 119,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "isObject",
+    "memberof": "source/utils.js",
+    "longname": "source/utils.js~isObject",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/utils.js",
+    "importStyle": "{isObject}",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "params": [
+      {
+        "name": "obj",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 120,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "isEqual",
+    "memberof": "source/utils.js",
+    "longname": "source/utils.js~isEqual",
+    "access": null,
+    "export": true,
+    "importPath": "pgf-model/source/utils.js",
+    "importStyle": "{isEqual}",
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "params": [
+      {
+        "name": "x",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "y",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 122,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 123,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 124,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 125,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 126,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 127,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 128,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 129,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 130,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 131,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 132,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 133,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 134,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 135,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 136,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 137,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 138,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 139,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 140,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 141,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 142,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 143,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 144,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 145,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 146,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 147,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 148,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 149,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 150,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 151,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 152,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 153,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 154,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 155,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 156,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 157,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 158,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 159,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 160,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 161,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 162,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 163,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 164,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 165,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 166,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 167,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 168,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 170,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 171,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 172,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 173,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 174,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 175,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 176,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 177,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "AudioContext",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 178,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/AuthTest.js",
+    "memberof": null,
+    "longname": "test/AuthTest.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Auth from '../source/auth.js';\r\nimport assert from 'assert';\r\ndescribe('Testing Auth', function() {\r\n  let auth\r\n  beforeEach(function() {\r\n    auth = new Auth()\r\n  });\r\n  it('Instance sould be object', function(done) {\r\n    assert.equal(typeof auth, \"object\");\r\n    done()\r\n  })\r\n})\r\n"
+  },
+  {
+    "__docId__": 179,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe0",
+    "testId": 0,
+    "memberof": "test/AuthTest.js",
+    "testDepth": 0,
+    "longname": "test/AuthTest.js~describe0",
+    "access": null,
+    "description": "Testing Auth",
+    "lineNumber": 3
+  },
+  {
+    "__docId__": 180,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it1",
+    "testId": 1,
+    "memberof": "test/AuthTest.js~describe0",
+    "testDepth": 1,
+    "longname": "test/AuthTest.js~describe0.it1",
+    "access": null,
+    "description": "Instance sould be object",
+    "lineNumber": 8
+  },
+  {
+    "__docId__": 181,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/channelsTest.js",
+    "memberof": null,
+    "longname": "test/channelsTest.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import channel from '../source/channels.js';\r\nimport assert from 'assert';\r\ndescribe('Testing channels:', function() {\r\n  let ch\r\n  beforeEach(function() {\r\n    ch = channel.getChannel(\"Zoom\")\r\n  });\r\n  it('channels can be imported', function(done) {\r\n    assert.ok(channel);\r\n    done()\r\n  })\r\n  it('can create a new channel via getChannel method', function(done) {\r\n    assert.ok(ch);\r\n    done()\r\n  })\r\n  it('can publish', function(done) {\r\n    assert.ok(ch.publish(\"Something\", \"something\"));\r\n    done()\r\n  })\r\n  it('can subscribe', function(done) {\r\n    assert.ok(ch.subscribe(\"Something\", \"something\"));\r\n    done()\r\n  })\r\n  it('can call a method', function(done) {\r\n    ch.subscribe(\"Zuum/action\", message)\r\n    ch.publish('Zuum/action', {run:true, walk: false})\r\n    function message(key, value) {\r\n      assert.equal(value.run, true)\r\n      done()\r\n    }\r\n  })\r\n  it('triggers the callback only on a subscribed channel', function(done) {\r\n    ch.subscribe(\"Zuum/action\", message)\r\n    ch.publish('Zuum/different_channel_name', {run:true, walk: false})\r\n    function message(key, value) {\r\n      assert.equal(value.run, false)\r\n    }\r\n    done()\r\n  })\r\n})\r\n"
+  },
+  {
+    "__docId__": 182,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe2",
+    "testId": 2,
+    "memberof": "test/channelsTest.js",
+    "testDepth": 0,
+    "longname": "test/channelsTest.js~describe2",
+    "access": null,
+    "description": "Testing channels:",
+    "lineNumber": 3
+  },
+  {
+    "__docId__": 183,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it3",
+    "testId": 3,
+    "memberof": "test/channelsTest.js~describe2",
+    "testDepth": 1,
+    "longname": "test/channelsTest.js~describe2.it3",
+    "access": null,
+    "description": "channels can be imported",
+    "lineNumber": 8
+  },
+  {
+    "__docId__": 184,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it4",
+    "testId": 4,
+    "memberof": "test/channelsTest.js~describe2",
+    "testDepth": 1,
+    "longname": "test/channelsTest.js~describe2.it4",
+    "access": null,
+    "description": "can create a new channel via getChannel method",
+    "lineNumber": 12
+  },
+  {
+    "__docId__": 185,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it5",
+    "testId": 5,
+    "memberof": "test/channelsTest.js~describe2",
+    "testDepth": 1,
+    "longname": "test/channelsTest.js~describe2.it5",
+    "access": null,
+    "description": "can publish",
+    "lineNumber": 16
+  },
+  {
+    "__docId__": 186,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it6",
+    "testId": 6,
+    "memberof": "test/channelsTest.js~describe2",
+    "testDepth": 1,
+    "longname": "test/channelsTest.js~describe2.it6",
+    "access": null,
+    "description": "can subscribe",
+    "lineNumber": 20
+  },
+  {
+    "__docId__": 187,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it7",
+    "testId": 7,
+    "memberof": "test/channelsTest.js~describe2",
+    "testDepth": 1,
+    "longname": "test/channelsTest.js~describe2.it7",
+    "access": null,
+    "description": "can call a method",
+    "lineNumber": 24
+  },
+  {
+    "__docId__": 188,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it8",
+    "testId": 8,
+    "memberof": "test/channelsTest.js~describe2",
+    "testDepth": 1,
+    "longname": "test/channelsTest.js~describe2.it8",
+    "access": null,
+    "description": "triggers the callback only on a subscribed channel",
+    "lineNumber": 32
+  },
+  {
+    "__docId__": 189,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/listenToTest.js",
+    "memberof": null,
+    "longname": "test/listenToTest.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import {listenTo} from '../source/listenTo.js';\r\nimport Model from '../source/model.js';\r\nimport assert from 'assert';\r\ndescribe('Testing listenTo:', function() {\r\n  let model\r\n  beforeEach(function() {\r\n    model = new Model()\r\n  });\r\n  it('listentTo can be imported', function(done) {\r\n    assert.ok(listenTo);\r\n    done()\r\n  })\r\n  it('listentTo can be used with a model', function(done) {\r\n    listenTo(model,\"name\", function(){})\r\n    done()\r\n  })\r\n  it('model param should be a Model instance', function(done) {\r\n    assert.throws(\r\n      function() {\r\n        listenTo(\"model\",\"name\", function(){})\r\n      }\r\n      ,\r\n      Error,\r\n      /model is not Model instance/\r\n    );\r\n    done()\r\n  })\r\n  it('should call a callback function', function(done) {\r\n    function myCallback() {\r\n      done()\r\n    }\r\n    listenTo(model, \"name\", myCallback)\r\n    model.set(\"name\", \"Vitalie\")\r\n  })\r\n  it('should NOT call a function if it is not listening for the proper key', function(done) {\r\n    let i = 0\r\n    function myCallback() {\r\n      i++\r\n      assert.equal(i, 1)\r\n    }\r\n    listenTo(model, \"name\", myCallback)\r\n    model.set(\"name\", \"Vitalie\")\r\n    model.set(\"id\", 20)\r\n    done()\r\n  })\r\n})\r\n"
+  },
+  {
+    "__docId__": 190,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe9",
+    "testId": 9,
+    "memberof": "test/listenToTest.js",
+    "testDepth": 0,
+    "longname": "test/listenToTest.js~describe9",
+    "access": null,
+    "description": "Testing listenTo:",
+    "lineNumber": 4
+  },
+  {
+    "__docId__": 191,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it10",
+    "testId": 10,
+    "memberof": "test/listenToTest.js~describe9",
+    "testDepth": 1,
+    "longname": "test/listenToTest.js~describe9.it10",
+    "access": null,
+    "description": "listentTo can be imported",
+    "lineNumber": 9
+  },
+  {
+    "__docId__": 192,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it11",
+    "testId": 11,
+    "memberof": "test/listenToTest.js~describe9",
+    "testDepth": 1,
+    "longname": "test/listenToTest.js~describe9.it11",
+    "access": null,
+    "description": "listentTo can be used with a model",
+    "lineNumber": 13
+  },
+  {
+    "__docId__": 193,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it12",
+    "testId": 12,
+    "memberof": "test/listenToTest.js~describe9",
+    "testDepth": 1,
+    "longname": "test/listenToTest.js~describe9.it12",
+    "access": null,
+    "description": "model param should be a Model instance",
+    "lineNumber": 17
+  },
+  {
+    "__docId__": 194,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it13",
+    "testId": 13,
+    "memberof": "test/listenToTest.js~describe9",
+    "testDepth": 1,
+    "longname": "test/listenToTest.js~describe9.it13",
+    "access": null,
+    "description": "should call a callback function",
+    "lineNumber": 28
+  },
+  {
+    "__docId__": 195,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it14",
+    "testId": 14,
+    "memberof": "test/listenToTest.js~describe9",
+    "testDepth": 1,
+    "longname": "test/listenToTest.js~describe9.it14",
+    "access": null,
+    "description": "should NOT call a function if it is not listening for the proper key",
+    "lineNumber": 35
+  },
+  {
+    "__docId__": 196,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/ModelTest.js",
+    "memberof": null,
+    "longname": "test/ModelTest.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Model from '../source/model.js';\r\nimport {listenTo} from '../source/listenTo.js';\r\nimport assert from 'assert';\r\n\r\ndescribe('Testing Model', function() {\r\n  it('Model sould be function', function(done) {\r\n    assert.equal(typeof Model, \"function\");\r\n    done()\r\n  });\r\n  it('Instance sould be object', function(done) {\r\n    let model = new Model()\r\n    assert.equal(typeof model, \"object\");\r\n    done()\r\n  });\r\n  describe('Testing Model Instance', function() {\r\n    let model\r\n    beforeEach(function() {\r\n      model = new Model();\r\n    });\r\n    it('should be able to set', function(done) {\r\n      model.set(\"name\", \"test\")\r\n      done()\r\n    });\r\n    it('should trow an error if key is missing', function(done) {\r\n      assert.throws(\r\n        function() {\r\n          model.set()\r\n        },\r\n        Error,\r\n        /Key is undefined/\r\n      );\r\n      done()\r\n    });\r\n    it('should be able to get', function(done) {\r\n      let value = model.get(\"name\")\r\n      assert.equal(value, \"test\")\r\n      done()\r\n    });\r\n    it('can be changed', function(done) {\r\n      model.set(\"name\", \"another test\")\r\n      let value = model.get(\"name\")\r\n      assert.equal(value, \"another test\")\r\n      done()\r\n    });\r\n    it('it dispatches ONE event when set ONCE', function(done) {\r\n      let i = 0\r\n      model.pubsub.subscribe(\"name\", function(){\r\n        i++\r\n        assert.equal(i, 1)\r\n      })\r\n      model.set(\"name\", \"test\")\r\n      done()\r\n    })\r\n    it('it is not dispatching an event when set twice with the same value', function(done) {\r\n      let i = 0\r\n      model.pubsub.subscribe(\"name\", function(){\r\n        i++\r\n        assert.equal(i, 1)\r\n      })\r\n      model.set(\"name\", \"test2\")\r\n      model.set(\"name\", \"test2\")\r\n      done()\r\n    })\r\n    it('it is not dispatching an event when called with silent option', function(done) {\r\n      let i = 0\r\n      model.pubsub.subscribe(\"name\", function(){\r\n        i++\r\n        assert.equal(i, 1)\r\n      })\r\n      model.set(\"name\", \"test3\")\r\n      model.set(\"name\", \"Something Silent\", {silent: true})\r\n      let value = model.get(\"name\")\r\n      assert.equal(value, \"Something Silent\")\r\n      done()\r\n    })\r\n  });\r\n  describe('Testing Model Defaults', function() {\r\n    let model\r\n    beforeEach(function() {\r\n      model = new Model({id: 10});\r\n    })\r\n    it('should create a model', function(done) {\r\n      assert.ok(model)\r\n      done()\r\n    })\r\n    it('should get the default', function(done) {\r\n      assert.equal(model.get(\"id\"), 10)\r\n      done()\r\n    })\r\n    it('Default argument should be object', function(done) {\r\n      assert.throws(\r\n        function() {\r\n          let modelError = new Model(\"10\");\r\n        },\r\n        Error,\r\n        /Passing string as default argument/\r\n      );\r\n      done()\r\n    })\r\n    it('Default is only one argument', function(done) {\r\n      assert.throws(\r\n        function() {\r\n          let modelE = new Model({id:10}, \"Some args\");\r\n        },\r\n        Error,\r\n        /Passing more than one default argument/\r\n      );\r\n      done()\r\n    })\r\n    it('Default is not dispatching an event', function(done) {\r\n      let i = 0\r\n      model.pubsub.subscribe(\"id\", function(){\r\n        i++\r\n        assert.equal(i, 1)\r\n      })\r\n      model.set(\"id\", 11)\r\n      done()\r\n    })\r\n    it('Will not dispatch an event if setted with the same value', function(done) {\r\n      let i = 0\r\n      let modelQ = new Model({id: 10})\r\n      modelQ.pubsub.subscribe(\"id\", function(){\r\n        i++\r\n        assert.equal(i, 0)\r\n      })\r\n      modelQ.set(\"id\", 10)\r\n      done()\r\n    })\r\n  })\r\n});\r\n"
+  },
+  {
+    "__docId__": 197,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe15",
+    "testId": 15,
+    "memberof": "test/ModelTest.js",
+    "testDepth": 0,
+    "longname": "test/ModelTest.js~describe15",
+    "access": null,
+    "description": "Testing Model",
+    "lineNumber": 5
+  },
+  {
+    "__docId__": 198,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it16",
+    "testId": 16,
+    "memberof": "test/ModelTest.js~describe15",
+    "testDepth": 1,
+    "longname": "test/ModelTest.js~describe15.it16",
+    "access": null,
+    "description": "Model sould be function",
+    "lineNumber": 6
+  },
+  {
+    "__docId__": 199,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it17",
+    "testId": 17,
+    "memberof": "test/ModelTest.js~describe15",
+    "testDepth": 1,
+    "longname": "test/ModelTest.js~describe15.it17",
+    "access": null,
+    "description": "Instance sould be object",
+    "lineNumber": 10
+  },
+  {
+    "__docId__": 200,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe18",
+    "testId": 18,
+    "memberof": "test/ModelTest.js~describe15",
+    "testDepth": 1,
+    "longname": "test/ModelTest.js~describe15.describe18",
+    "access": null,
+    "description": "Testing Model Instance",
+    "lineNumber": 15
+  },
+  {
+    "__docId__": 201,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it19",
+    "testId": 19,
+    "memberof": "test/ModelTest.js~describe15.describe18",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe18.it19",
+    "access": null,
+    "description": "should be able to set",
+    "lineNumber": 20
+  },
+  {
+    "__docId__": 202,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it20",
+    "testId": 20,
+    "memberof": "test/ModelTest.js~describe15.describe18",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe18.it20",
+    "access": null,
+    "description": "should trow an error if key is missing",
+    "lineNumber": 24
+  },
+  {
+    "__docId__": 203,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it21",
+    "testId": 21,
+    "memberof": "test/ModelTest.js~describe15.describe18",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe18.it21",
+    "access": null,
+    "description": "should be able to get",
+    "lineNumber": 34
+  },
+  {
+    "__docId__": 204,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it22",
+    "testId": 22,
+    "memberof": "test/ModelTest.js~describe15.describe18",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe18.it22",
+    "access": null,
+    "description": "can be changed",
+    "lineNumber": 39
+  },
+  {
+    "__docId__": 205,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it23",
+    "testId": 23,
+    "memberof": "test/ModelTest.js~describe15.describe18",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe18.it23",
+    "access": null,
+    "description": "it dispatches ONE event when set ONCE",
+    "lineNumber": 45
+  },
+  {
+    "__docId__": 206,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it24",
+    "testId": 24,
+    "memberof": "test/ModelTest.js~describe15.describe18",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe18.it24",
+    "access": null,
+    "description": "it is not dispatching an event when set twice with the same value",
+    "lineNumber": 54
+  },
+  {
+    "__docId__": 207,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it25",
+    "testId": 25,
+    "memberof": "test/ModelTest.js~describe15.describe18",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe18.it25",
+    "access": null,
+    "description": "it is not dispatching an event when called with silent option",
+    "lineNumber": 64
+  },
+  {
+    "__docId__": 208,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe26",
+    "testId": 26,
+    "memberof": "test/ModelTest.js~describe15",
+    "testDepth": 1,
+    "longname": "test/ModelTest.js~describe15.describe26",
+    "access": null,
+    "description": "Testing Model Defaults",
+    "lineNumber": 77
+  },
+  {
+    "__docId__": 209,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it27",
+    "testId": 27,
+    "memberof": "test/ModelTest.js~describe15.describe26",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe26.it27",
+    "access": null,
+    "description": "should create a model",
+    "lineNumber": 82
+  },
+  {
+    "__docId__": 210,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it28",
+    "testId": 28,
+    "memberof": "test/ModelTest.js~describe15.describe26",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe26.it28",
+    "access": null,
+    "description": "should get the default",
+    "lineNumber": 86
+  },
+  {
+    "__docId__": 211,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it29",
+    "testId": 29,
+    "memberof": "test/ModelTest.js~describe15.describe26",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe26.it29",
+    "access": null,
+    "description": "Default argument should be object",
+    "lineNumber": 90
+  },
+  {
+    "__docId__": 212,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it30",
+    "testId": 30,
+    "memberof": "test/ModelTest.js~describe15.describe26",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe26.it30",
+    "access": null,
+    "description": "Default is only one argument",
+    "lineNumber": 100
+  },
+  {
+    "__docId__": 213,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it31",
+    "testId": 31,
+    "memberof": "test/ModelTest.js~describe15.describe26",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe26.it31",
+    "access": null,
+    "description": "Default is not dispatching an event",
+    "lineNumber": 110
+  },
+  {
+    "__docId__": 214,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it32",
+    "testId": 32,
+    "memberof": "test/ModelTest.js~describe15.describe26",
+    "testDepth": 2,
+    "longname": "test/ModelTest.js~describe15.describe26.it32",
+    "access": null,
+    "description": "Will not dispatch an event if setted with the same value",
+    "lineNumber": 119
+  },
+  {
+    "__docId__": 215,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/requestTest.js",
+    "memberof": null,
+    "longname": "test/requestTest.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import Request from '../source/request.js'\r\nimport assert from 'assert'\r\ndescribe('Testing Request', function() {\r\n  let request\r\n  beforeEach(function() {\r\n    request = new Request()\r\n  })\r\n  it('Should create the request Instance', function(done) {\r\n    assert.ok(request)\r\n    done()\r\n  })\r\n  it('Instance sould be object', function(done) {\r\n    assert.equal(typeof request, \"object\")\r\n    done()\r\n  })\r\n})\r\n"
+  },
+  {
+    "__docId__": 216,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe33",
+    "testId": 33,
+    "memberof": "test/requestTest.js",
+    "testDepth": 0,
+    "longname": "test/requestTest.js~describe33",
+    "access": null,
+    "description": "Testing Request",
+    "lineNumber": 3
+  },
+  {
+    "__docId__": 217,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it34",
+    "testId": 34,
+    "memberof": "test/requestTest.js~describe33",
+    "testDepth": 1,
+    "longname": "test/requestTest.js~describe33.it34",
+    "access": null,
+    "description": "Should create the request Instance",
+    "lineNumber": 8
+  },
+  {
+    "__docId__": 218,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it35",
+    "testId": 35,
+    "memberof": "test/requestTest.js~describe33",
+    "testDepth": 1,
+    "longname": "test/requestTest.js~describe33.it35",
+    "access": null,
+    "description": "Instance sould be object",
+    "lineNumber": 12
+  }
+]

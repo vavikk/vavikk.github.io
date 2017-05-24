@@ -1,0 +1,2571 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Model",
+            "range": [
+              7,
+              12
+            ],
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 7
+              },
+              "end": {
+                "line": 1,
+                "column": 12
+              }
+            }
+          },
+          "range": [
+            7,
+            12
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 7
+            },
+            "end": {
+              "line": 1,
+              "column": 12
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./model.js",
+        "raw": "'./model.js'",
+        "range": [
+          18,
+          30
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 18
+          },
+          "end": {
+            "line": 1,
+            "column": 30
+          }
+        }
+      },
+      "range": [
+        0,
+        32
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Auth",
+            "range": [
+              39,
+              43
+            ],
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 7
+              },
+              "end": {
+                "line": 2,
+                "column": 11
+              }
+            }
+          },
+          "range": [
+            39,
+            43
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 7
+            },
+            "end": {
+              "line": 2,
+              "column": 11
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./auth.js",
+        "raw": "'./auth.js'",
+        "range": [
+          49,
+          60
+        ],
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 17
+          },
+          "end": {
+            "line": 2,
+            "column": 28
+          }
+        }
+      },
+      "range": [
+        32,
+        62
+      ],
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 3,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Device",
+            "range": [
+              69,
+              75
+            ],
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 7
+              },
+              "end": {
+                "line": 3,
+                "column": 13
+              }
+            }
+          },
+          "range": [
+            69,
+            75
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 7
+            },
+            "end": {
+              "line": 3,
+              "column": 13
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./deviceInfo.js",
+        "raw": "'./deviceInfo.js'",
+        "range": [
+          81,
+          98
+        ],
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 19
+          },
+          "end": {
+            "line": 3,
+            "column": 36
+          }
+        }
+      },
+      "range": [
+        62,
+        100
+      ],
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "listenTo",
+            "range": [
+              108,
+              116
+            ],
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 8
+              },
+              "end": {
+                "line": 4,
+                "column": 16
+              }
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "listenTo",
+            "range": [
+              108,
+              116
+            ],
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 8
+              },
+              "end": {
+                "line": 4,
+                "column": 16
+              }
+            }
+          },
+          "range": [
+            108,
+            116
+          ],
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 8
+            },
+            "end": {
+              "line": 4,
+              "column": 16
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./listenTo.js",
+        "raw": "'./listenTo.js'",
+        "range": [
+          123,
+          138
+        ],
+        "loc": {
+          "start": {
+            "line": 4,
+            "column": 23
+          },
+          "end": {
+            "line": 4,
+            "column": 38
+          }
+        }
+      },
+      "range": [
+        100,
+        140
+      ],
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 5,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportDefaultSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "Observer",
+            "range": [
+              147,
+              155
+            ],
+            "loc": {
+              "start": {
+                "line": 5,
+                "column": 7
+              },
+              "end": {
+                "line": 5,
+                "column": 15
+              }
+            }
+          },
+          "range": [
+            147,
+            155
+          ],
+          "loc": {
+            "start": {
+              "line": 5,
+              "column": 7
+            },
+            "end": {
+              "line": 5,
+              "column": 15
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./Observer.js",
+        "raw": "'./Observer.js'",
+        "range": [
+          161,
+          176
+        ],
+        "loc": {
+          "start": {
+            "line": 5,
+            "column": 21
+          },
+          "end": {
+            "line": 5,
+            "column": 36
+          }
+        }
+      },
+      "range": [
+        140,
+        180
+      ],
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "backgroundImage",
+            "range": [
+              185,
+              200
+            ],
+            "loc": {
+              "start": {
+                "line": 7,
+                "column": 5
+              },
+              "end": {
+                "line": 7,
+                "column": 20
+              }
+            }
+          },
+          "init": null,
+          "range": [
+            185,
+            200
+          ],
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 5
+            },
+            "end": {
+              "line": 7,
+              "column": 20
+            }
+          }
+        },
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "treesImage",
+            "range": [
+              203,
+              213
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 0
+              },
+              "end": {
+                "line": 8,
+                "column": 10
+              }
+            }
+          },
+          "init": null,
+          "range": [
+            203,
+            213
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 0
+            },
+            "end": {
+              "line": 8,
+              "column": 10
+            }
+          }
+        },
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "groundImage",
+            "range": [
+              215,
+              226
+            ],
+            "loc": {
+              "start": {
+                "line": 8,
+                "column": 12
+              },
+              "end": {
+                "line": 8,
+                "column": 23
+              }
+            }
+          },
+          "init": null,
+          "range": [
+            215,
+            226
+          ],
+          "loc": {
+            "start": {
+              "line": 8,
+              "column": 12
+            },
+            "end": {
+              "line": 8,
+              "column": 23
+            }
+          }
+        }
+      ],
+      "kind": "let",
+      "range": [
+        180,
+        228
+      ],
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 9,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "BlockStatement",
+      "body": [
+        {
+          "type": "VariableDeclaration",
+          "declarations": [
+            {
+              "type": "VariableDeclarator",
+              "id": {
+                "type": "Identifier",
+                "name": "v",
+                "range": [
+                  237,
+                  238
+                ],
+                "loc": {
+                  "start": {
+                    "line": 10,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 7
+                  }
+                }
+              },
+              "init": {
+                "type": "Literal",
+                "value": "FRAMEWORK VS 1.1",
+                "raw": "\"FRAMEWORK VS 1.1\"",
+                "range": [
+                  241,
+                  259
+                ],
+                "loc": {
+                  "start": {
+                    "line": 10,
+                    "column": 10
+                  },
+                  "end": {
+                    "line": 10,
+                    "column": 28
+                  }
+                }
+              },
+              "range": [
+                237,
+                259
+              ],
+              "loc": {
+                "start": {
+                  "line": 10,
+                  "column": 6
+                },
+                "end": {
+                  "line": 10,
+                  "column": 28
+                }
+              }
+            }
+          ],
+          "kind": "const",
+          "range": [
+            231,
+            261
+          ],
+          "loc": {
+            "start": {
+              "line": 10,
+              "column": 0
+            },
+            "end": {
+              "line": 11,
+              "column": 0
+            }
+          }
+        },
+        {
+          "type": "ExpressionStatement",
+          "expression": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "MemberExpression",
+              "computed": false,
+              "object": {
+                "type": "Identifier",
+                "name": "console",
+                "range": [
+                  261,
+                  268
+                ],
+                "loc": {
+                  "start": {
+                    "line": 11,
+                    "column": 0
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 7
+                  }
+                }
+              },
+              "property": {
+                "type": "Identifier",
+                "name": "log",
+                "range": [
+                  269,
+                  272
+                ],
+                "loc": {
+                  "start": {
+                    "line": 11,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 11
+                  }
+                }
+              },
+              "range": [
+                261,
+                272
+              ],
+              "loc": {
+                "start": {
+                  "line": 11,
+                  "column": 0
+                },
+                "end": {
+                  "line": 11,
+                  "column": 11
+                }
+              }
+            },
+            "arguments": [
+              {
+                "type": "Identifier",
+                "name": "v",
+                "range": [
+                  273,
+                  274
+                ],
+                "loc": {
+                  "start": {
+                    "line": 11,
+                    "column": 12
+                  },
+                  "end": {
+                    "line": 11,
+                    "column": 13
+                  }
+                }
+              }
+            ],
+            "range": [
+              261,
+              275
+            ],
+            "loc": {
+              "start": {
+                "line": 11,
+                "column": 0
+              },
+              "end": {
+                "line": 11,
+                "column": 14
+              }
+            }
+          },
+          "range": [
+            261,
+            277
+          ],
+          "loc": {
+            "start": {
+              "line": 11,
+              "column": 0
+            },
+            "end": {
+              "line": 12,
+              "column": 0
+            }
+          }
+        }
+      ],
+      "range": [
+        228,
+        278
+      ],
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 12,
+          "column": 1
+        }
+      }
+    },
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "device",
+            "range": [
+              286,
+              292
+            ],
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 4
+              },
+              "end": {
+                "line": 14,
+                "column": 10
+              }
+            }
+          },
+          "init": {
+            "type": "NewExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "Device",
+              "range": [
+                299,
+                305
+              ],
+              "loc": {
+                "start": {
+                  "line": 14,
+                  "column": 17
+                },
+                "end": {
+                  "line": 14,
+                  "column": 23
+                }
+              }
+            },
+            "arguments": [],
+            "range": [
+              295,
+              307
+            ],
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 13
+              },
+              "end": {
+                "line": 14,
+                "column": 25
+              }
+            }
+          },
+          "range": [
+            286,
+            307
+          ],
+          "loc": {
+            "start": {
+              "line": 14,
+              "column": 4
+            },
+            "end": {
+              "line": 14,
+              "column": 25
+            }
+          }
+        }
+      ],
+      "kind": "let",
+      "range": [
+        282,
+        311
+      ],
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 0
+        },
+        "end": {
+          "line": 16,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "model",
+            "range": [
+              315,
+              320
+            ],
+            "loc": {
+              "start": {
+                "line": 16,
+                "column": 4
+              },
+              "end": {
+                "line": 16,
+                "column": 9
+              }
+            }
+          },
+          "init": {
+            "type": "NewExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "Model",
+              "range": [
+                327,
+                332
+              ],
+              "loc": {
+                "start": {
+                  "line": 16,
+                  "column": 16
+                },
+                "end": {
+                  "line": 16,
+                  "column": 21
+                }
+              }
+            },
+            "arguments": [],
+            "range": [
+              323,
+              334
+            ],
+            "loc": {
+              "start": {
+                "line": 16,
+                "column": 12
+              },
+              "end": {
+                "line": 16,
+                "column": 23
+              }
+            }
+          },
+          "range": [
+            315,
+            334
+          ],
+          "loc": {
+            "start": {
+              "line": 16,
+              "column": 4
+            },
+            "end": {
+              "line": 16,
+              "column": 23
+            }
+          }
+        }
+      ],
+      "kind": "let",
+      "range": [
+        311,
+        338
+      ],
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 0
+        },
+        "end": {
+          "line": 18,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "Identifier",
+          "name": "listenTo",
+          "range": [
+            338,
+            346
+          ],
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 0
+            },
+            "end": {
+              "line": 18,
+              "column": 8
+            }
+          }
+        },
+        "arguments": [
+          {
+            "type": "Identifier",
+            "name": "model",
+            "range": [
+              347,
+              352
+            ],
+            "loc": {
+              "start": {
+                "line": 18,
+                "column": 9
+              },
+              "end": {
+                "line": 18,
+                "column": 14
+              }
+            }
+          },
+          {
+            "type": "Literal",
+            "value": "name",
+            "raw": "\"name\"",
+            "range": [
+              354,
+              360
+            ],
+            "loc": {
+              "start": {
+                "line": 18,
+                "column": 16
+              },
+              "end": {
+                "line": 18,
+                "column": 22
+              }
+            }
+          },
+          {
+            "type": "FunctionExpression",
+            "id": null,
+            "params": [],
+            "body": {
+              "type": "BlockStatement",
+              "body": [
+                {
+                  "type": "ExpressionStatement",
+                  "expression": {
+                    "type": "CallExpression",
+                    "callee": {
+                      "type": "MemberExpression",
+                      "computed": false,
+                      "object": {
+                        "type": "Identifier",
+                        "name": "console",
+                        "range": [
+                          378,
+                          385
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 19,
+                            "column": 2
+                          },
+                          "end": {
+                            "line": 19,
+                            "column": 9
+                          }
+                        }
+                      },
+                      "property": {
+                        "type": "Identifier",
+                        "name": "log",
+                        "range": [
+                          386,
+                          389
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 19,
+                            "column": 10
+                          },
+                          "end": {
+                            "line": 19,
+                            "column": 13
+                          }
+                        }
+                      },
+                      "range": [
+                        378,
+                        389
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 19,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 19,
+                          "column": 13
+                        }
+                      }
+                    },
+                    "arguments": [
+                      {
+                        "type": "Literal",
+                        "value": "JA",
+                        "raw": "\"JA\"",
+                        "range": [
+                          390,
+                          394
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 19,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 19,
+                            "column": 18
+                          }
+                        }
+                      }
+                    ],
+                    "range": [
+                      378,
+                      395
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 19,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 19,
+                        "column": 19
+                      }
+                    }
+                  },
+                  "range": [
+                    378,
+                    397
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 19,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 20,
+                      "column": 0
+                    }
+                  }
+                }
+              ],
+              "range": [
+                373,
+                398
+              ],
+              "loc": {
+                "start": {
+                  "line": 18,
+                  "column": 35
+                },
+                "end": {
+                  "line": 20,
+                  "column": 1
+                }
+              }
+            },
+            "generator": false,
+            "expression": false,
+            "range": [
+              362,
+              398
+            ],
+            "loc": {
+              "start": {
+                "line": 18,
+                "column": 24
+              },
+              "end": {
+                "line": 20,
+                "column": 1
+              }
+            }
+          }
+        ],
+        "range": [
+          338,
+          399
+        ],
+        "loc": {
+          "start": {
+            "line": 18,
+            "column": 0
+          },
+          "end": {
+            "line": 20,
+            "column": 2
+          }
+        }
+      },
+      "range": [
+        338,
+        403
+      ],
+      "loc": {
+        "start": {
+          "line": 18,
+          "column": 0
+        },
+        "end": {
+          "line": 22,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "Identifier",
+            "name": "model",
+            "range": [
+              403,
+              408
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 0
+              },
+              "end": {
+                "line": 22,
+                "column": 5
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "set",
+            "range": [
+              409,
+              412
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 6
+              },
+              "end": {
+                "line": 22,
+                "column": 9
+              }
+            }
+          },
+          "range": [
+            403,
+            412
+          ],
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 0
+            },
+            "end": {
+              "line": 22,
+              "column": 9
+            }
+          }
+        },
+        "arguments": [
+          {
+            "type": "Literal",
+            "value": "name",
+            "raw": "\"name\"",
+            "range": [
+              413,
+              419
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 10
+              },
+              "end": {
+                "line": 22,
+                "column": 16
+              }
+            }
+          },
+          {
+            "type": "Literal",
+            "value": "vitalie",
+            "raw": "\"vitalie\"",
+            "range": [
+              421,
+              430
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 18
+              },
+              "end": {
+                "line": 22,
+                "column": 27
+              }
+            }
+          }
+        ],
+        "range": [
+          403,
+          431
+        ],
+        "loc": {
+          "start": {
+            "line": 22,
+            "column": 0
+          },
+          "end": {
+            "line": 22,
+            "column": 28
+          }
+        }
+      },
+      "range": [
+        403,
+        433
+      ],
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 0
+        },
+        "end": {
+          "line": 23,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "Identifier",
+            "name": "model",
+            "range": [
+              433,
+              438
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 0
+              },
+              "end": {
+                "line": 23,
+                "column": 5
+              }
+            }
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "set",
+            "range": [
+              439,
+              442
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 6
+              },
+              "end": {
+                "line": 23,
+                "column": 9
+              }
+            }
+          },
+          "range": [
+            433,
+            442
+          ],
+          "loc": {
+            "start": {
+              "line": 23,
+              "column": 0
+            },
+            "end": {
+              "line": 23,
+              "column": 9
+            }
+          }
+        },
+        "arguments": [
+          {
+            "type": "Literal",
+            "value": "name",
+            "raw": "\"name\"",
+            "range": [
+              443,
+              449
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 10
+              },
+              "end": {
+                "line": 23,
+                "column": 16
+              }
+            }
+          },
+          {
+            "type": "Literal",
+            "value": "dan",
+            "raw": "\"dan\"",
+            "range": [
+              451,
+              456
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 18
+              },
+              "end": {
+                "line": 23,
+                "column": 23
+              }
+            }
+          },
+          {
+            "type": "ObjectExpression",
+            "properties": [
+              {
+                "type": "Property",
+                "key": {
+                  "type": "Identifier",
+                  "name": "silent",
+                  "range": [
+                    459,
+                    465
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 23,
+                      "column": 26
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 32
+                    }
+                  }
+                },
+                "value": {
+                  "type": "Literal",
+                  "value": true,
+                  "raw": "true",
+                  "range": [
+                    467,
+                    471
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 23,
+                      "column": 34
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 38
+                    }
+                  }
+                },
+                "kind": "init",
+                "method": false,
+                "shorthand": false,
+                "computed": false,
+                "range": [
+                  459,
+                  471
+                ],
+                "loc": {
+                  "start": {
+                    "line": 23,
+                    "column": 26
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 38
+                  }
+                }
+              }
+            ],
+            "range": [
+              458,
+              472
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 25
+              },
+              "end": {
+                "line": 23,
+                "column": 39
+              }
+            }
+          }
+        ],
+        "range": [
+          433,
+          473
+        ],
+        "loc": {
+          "start": {
+            "line": 23,
+            "column": 0
+          },
+          "end": {
+            "line": 23,
+            "column": 40
+          }
+        },
+        "trailingComments": [
+          {
+            "type": "Line",
+            "value": " // observer test",
+            "range": [
+              477,
+              496
+            ],
+            "loc": {
+              "start": {
+                "line": 25,
+                "column": 0
+              },
+              "end": {
+                "line": 25,
+                "column": 19
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " let obs = new Observer()",
+            "range": [
+              498,
+              525
+            ],
+            "loc": {
+              "start": {
+                "line": 26,
+                "column": 0
+              },
+              "end": {
+                "line": 26,
+                "column": 27
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " obs.b = 5",
+            "range": [
+              527,
+              539
+            ],
+            "loc": {
+              "start": {
+                "line": 27,
+                "column": 0
+              },
+              "end": {
+                "line": 27,
+                "column": 12
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " obs.a = 0",
+            "range": [
+              541,
+              553
+            ],
+            "loc": {
+              "start": {
+                "line": 28,
+                "column": 0
+              },
+              "end": {
+                "line": 28,
+                "column": 12
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " obs.addObserver(function(){",
+            "range": [
+              555,
+              585
+            ],
+            "loc": {
+              "start": {
+                "line": 29,
+                "column": 0
+              },
+              "end": {
+                "line": 29,
+                "column": 30
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "   if(obs.a > obs.b) {",
+            "range": [
+              587,
+              611
+            ],
+            "loc": {
+              "start": {
+                "line": 30,
+                "column": 0
+              },
+              "end": {
+                "line": 30,
+                "column": 24
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "     console.log(\"obs.a > obs.b\", obs.a,obs.b)",
+            "range": [
+              613,
+              661
+            ],
+            "loc": {
+              "start": {
+                "line": 31,
+                "column": 0
+              },
+              "end": {
+                "line": 31,
+                "column": 48
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "   } else {",
+            "range": [
+              663,
+              676
+            ],
+            "loc": {
+              "start": {
+                "line": 32,
+                "column": 0
+              },
+              "end": {
+                "line": 32,
+                "column": 13
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "     console.log(\"obs.a < obs.b\", obs.a,obs.b)",
+            "range": [
+              678,
+              726
+            ],
+            "loc": {
+              "start": {
+                "line": 33,
+                "column": 0
+              },
+              "end": {
+                "line": 33,
+                "column": 48
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "   }",
+            "range": [
+              728,
+              734
+            ],
+            "loc": {
+              "start": {
+                "line": 34,
+                "column": 0
+              },
+              "end": {
+                "line": 34,
+                "column": 6
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " })",
+            "range": [
+              736,
+              741
+            ],
+            "loc": {
+              "start": {
+                "line": 35,
+                "column": 0
+              },
+              "end": {
+                "line": 35,
+                "column": 5
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " var canvas = document.getElementById(\"demo\");",
+            "range": [
+              743,
+              791
+            ],
+            "loc": {
+              "start": {
+                "line": 36,
+                "column": 0
+              },
+              "end": {
+                "line": 36,
+                "column": 48
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " demo.addEventListener(\"click\", () => {",
+            "range": [
+              793,
+              834
+            ],
+            "loc": {
+              "start": {
+                "line": 37,
+                "column": 0
+              },
+              "end": {
+                "line": 37,
+                "column": 41
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "   console.log(\"CLICK1\")",
+            "range": [
+              836,
+              862
+            ],
+            "loc": {
+              "start": {
+                "line": 38,
+                "column": 0
+              },
+              "end": {
+                "line": 38,
+                "column": 26
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "   obs.a++",
+            "range": [
+              864,
+              876
+            ],
+            "loc": {
+              "start": {
+                "line": 39,
+                "column": 0
+              },
+              "end": {
+                "line": 39,
+                "column": 12
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "   obs.notify({",
+            "range": [
+              878,
+              895
+            ],
+            "loc": {
+              "start": {
+                "line": 40,
+                "column": 0
+              },
+              "end": {
+                "line": 40,
+                "column": 17
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "     a: obs.a",
+            "range": [
+              897,
+              912
+            ],
+            "loc": {
+              "start": {
+                "line": 41,
+                "column": 0
+              },
+              "end": {
+                "line": 41,
+                "column": 15
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "   })",
+            "range": [
+              914,
+              921
+            ],
+            "loc": {
+              "start": {
+                "line": 42,
+                "column": 0
+              },
+              "end": {
+                "line": 42,
+                "column": 7
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " }, false)",
+            "range": [
+              923,
+              935
+            ],
+            "loc": {
+              "start": {
+                "line": 43,
+                "column": 0
+              },
+              "end": {
+                "line": 43,
+                "column": 12
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "console.log(model.get(\"name\"))",
+            "range": [
+              939,
+              971
+            ],
+            "loc": {
+              "start": {
+                "line": 45,
+                "column": 0
+              },
+              "end": {
+                "line": 45,
+                "column": 32
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " let auth = new Auth()",
+            "range": [
+              975,
+              999
+            ],
+            "loc": {
+              "start": {
+                "line": 47,
+                "column": 0
+              },
+              "end": {
+                "line": 47,
+                "column": 24
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " auth.getGameInfo()",
+            "range": [
+              1001,
+              1022
+            ],
+            "loc": {
+              "start": {
+                "line": 48,
+                "column": 0
+              },
+              "end": {
+                "line": 48,
+                "column": 21
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " .then(",
+            "range": [
+              1024,
+              1033
+            ],
+            "loc": {
+              "start": {
+                "line": 49,
+                "column": 0
+              },
+              "end": {
+                "line": 49,
+                "column": 9
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "   function(data) {",
+            "range": [
+              1035,
+              1056
+            ],
+            "loc": {
+              "start": {
+                "line": 50,
+                "column": 0
+              },
+              "end": {
+                "line": 50,
+                "column": 21
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "     let {sessionId, gameId}  = data",
+            "range": [
+              1058,
+              1096
+            ],
+            "loc": {
+              "start": {
+                "line": 51,
+                "column": 0
+              },
+              "end": {
+                "line": 51,
+                "column": 38
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "     console.log(\"Data is an object\", data)",
+            "range": [
+              1098,
+              1143
+            ],
+            "loc": {
+              "start": {
+                "line": 52,
+                "column": 0
+              },
+              "end": {
+                "line": 52,
+                "column": 45
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "     console.log(\"The session id is: \", sessionId)",
+            "range": [
+              1145,
+              1197
+            ],
+            "loc": {
+              "start": {
+                "line": 53,
+                "column": 0
+              },
+              "end": {
+                "line": 53,
+                "column": 52
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "     //callAfunction(sessionId, gameId)",
+            "range": [
+              1199,
+              1240
+            ],
+            "loc": {
+              "start": {
+                "line": 54,
+                "column": 0
+              },
+              "end": {
+                "line": 54,
+                "column": 41
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": "   }",
+            "range": [
+              1242,
+              1248
+            ],
+            "loc": {
+              "start": {
+                "line": 55,
+                "column": 0
+              },
+              "end": {
+                "line": 55,
+                "column": 6
+              }
+            }
+          },
+          {
+            "type": "Line",
+            "value": " )",
+            "range": [
+              1250,
+              1254
+            ],
+            "loc": {
+              "start": {
+                "line": 56,
+                "column": 0
+              },
+              "end": {
+                "line": 56,
+                "column": 4
+              }
+            }
+          }
+        ]
+      },
+      "range": [
+        433,
+        1256
+      ],
+      "loc": {
+        "start": {
+          "line": 23,
+          "column": 0
+        },
+        "end": {
+          "line": 57,
+          "column": 0
+        }
+      }
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    0,
+    1256
+  ],
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 57,
+      "column": 0
+    }
+  },
+  "comments": [
+    {
+      "type": "Line",
+      "value": " // observer test",
+      "range": [
+        477,
+        496
+      ],
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 25,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " let obs = new Observer()",
+      "range": [
+        498,
+        525
+      ],
+      "loc": {
+        "start": {
+          "line": 26,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 27
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " obs.b = 5",
+      "range": [
+        527,
+        539
+      ],
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 0
+        },
+        "end": {
+          "line": 27,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " obs.a = 0",
+      "range": [
+        541,
+        553
+      ],
+      "loc": {
+        "start": {
+          "line": 28,
+          "column": 0
+        },
+        "end": {
+          "line": 28,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " obs.addObserver(function(){",
+      "range": [
+        555,
+        585
+      ],
+      "loc": {
+        "start": {
+          "line": 29,
+          "column": 0
+        },
+        "end": {
+          "line": 29,
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "   if(obs.a > obs.b) {",
+      "range": [
+        587,
+        611
+      ],
+      "loc": {
+        "start": {
+          "line": 30,
+          "column": 0
+        },
+        "end": {
+          "line": 30,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "     console.log(\"obs.a > obs.b\", obs.a,obs.b)",
+      "range": [
+        613,
+        661
+      ],
+      "loc": {
+        "start": {
+          "line": 31,
+          "column": 0
+        },
+        "end": {
+          "line": 31,
+          "column": 48
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "   } else {",
+      "range": [
+        663,
+        676
+      ],
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 32,
+          "column": 13
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "     console.log(\"obs.a < obs.b\", obs.a,obs.b)",
+      "range": [
+        678,
+        726
+      ],
+      "loc": {
+        "start": {
+          "line": 33,
+          "column": 0
+        },
+        "end": {
+          "line": 33,
+          "column": 48
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "   }",
+      "range": [
+        728,
+        734
+      ],
+      "loc": {
+        "start": {
+          "line": 34,
+          "column": 0
+        },
+        "end": {
+          "line": 34,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " })",
+      "range": [
+        736,
+        741
+      ],
+      "loc": {
+        "start": {
+          "line": 35,
+          "column": 0
+        },
+        "end": {
+          "line": 35,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " var canvas = document.getElementById(\"demo\");",
+      "range": [
+        743,
+        791
+      ],
+      "loc": {
+        "start": {
+          "line": 36,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 48
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " demo.addEventListener(\"click\", () => {",
+      "range": [
+        793,
+        834
+      ],
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 0
+        },
+        "end": {
+          "line": 37,
+          "column": 41
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "   console.log(\"CLICK1\")",
+      "range": [
+        836,
+        862
+      ],
+      "loc": {
+        "start": {
+          "line": 38,
+          "column": 0
+        },
+        "end": {
+          "line": 38,
+          "column": 26
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "   obs.a++",
+      "range": [
+        864,
+        876
+      ],
+      "loc": {
+        "start": {
+          "line": 39,
+          "column": 0
+        },
+        "end": {
+          "line": 39,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "   obs.notify({",
+      "range": [
+        878,
+        895
+      ],
+      "loc": {
+        "start": {
+          "line": 40,
+          "column": 0
+        },
+        "end": {
+          "line": 40,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "     a: obs.a",
+      "range": [
+        897,
+        912
+      ],
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 0
+        },
+        "end": {
+          "line": 41,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "   })",
+      "range": [
+        914,
+        921
+      ],
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 0
+        },
+        "end": {
+          "line": 42,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " }, false)",
+      "range": [
+        923,
+        935
+      ],
+      "loc": {
+        "start": {
+          "line": 43,
+          "column": 0
+        },
+        "end": {
+          "line": 43,
+          "column": 12
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "console.log(model.get(\"name\"))",
+      "range": [
+        939,
+        971
+      ],
+      "loc": {
+        "start": {
+          "line": 45,
+          "column": 0
+        },
+        "end": {
+          "line": 45,
+          "column": 32
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " let auth = new Auth()",
+      "range": [
+        975,
+        999
+      ],
+      "loc": {
+        "start": {
+          "line": 47,
+          "column": 0
+        },
+        "end": {
+          "line": 47,
+          "column": 24
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " auth.getGameInfo()",
+      "range": [
+        1001,
+        1022
+      ],
+      "loc": {
+        "start": {
+          "line": 48,
+          "column": 0
+        },
+        "end": {
+          "line": 48,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " .then(",
+      "range": [
+        1024,
+        1033
+      ],
+      "loc": {
+        "start": {
+          "line": 49,
+          "column": 0
+        },
+        "end": {
+          "line": 49,
+          "column": 9
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "   function(data) {",
+      "range": [
+        1035,
+        1056
+      ],
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 0
+        },
+        "end": {
+          "line": 50,
+          "column": 21
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "     let {sessionId, gameId}  = data",
+      "range": [
+        1058,
+        1096
+      ],
+      "loc": {
+        "start": {
+          "line": 51,
+          "column": 0
+        },
+        "end": {
+          "line": 51,
+          "column": 38
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "     console.log(\"Data is an object\", data)",
+      "range": [
+        1098,
+        1143
+      ],
+      "loc": {
+        "start": {
+          "line": 52,
+          "column": 0
+        },
+        "end": {
+          "line": 52,
+          "column": 45
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "     console.log(\"The session id is: \", sessionId)",
+      "range": [
+        1145,
+        1197
+      ],
+      "loc": {
+        "start": {
+          "line": 53,
+          "column": 0
+        },
+        "end": {
+          "line": 53,
+          "column": 52
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "     //callAfunction(sessionId, gameId)",
+      "range": [
+        1199,
+        1240
+      ],
+      "loc": {
+        "start": {
+          "line": 54,
+          "column": 0
+        },
+        "end": {
+          "line": 54,
+          "column": 41
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": "   }",
+      "range": [
+        1242,
+        1248
+      ],
+      "loc": {
+        "start": {
+          "line": 55,
+          "column": 0
+        },
+        "end": {
+          "line": 55,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " )",
+      "range": [
+        1250,
+        1254
+      ],
+      "loc": {
+        "start": {
+          "line": 56,
+          "column": 0
+        },
+        "end": {
+          "line": 56,
+          "column": 4
+        }
+      }
+    }
+  ]
+}

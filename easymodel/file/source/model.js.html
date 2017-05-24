@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">source/model.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/Observer.js~Observer.html">Observer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/auth.js~Auth.html">Auth</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/channels.js~ChannelFactory.html">ChannelFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/deviceInfo.js~Device.html">Device</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/model.js~Model.html">Model</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/pubsub.js~PubSub.html">PubSub</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/request.js~Request.html">Request</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-listenTo">listenTo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isEqual">isEqual</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isObject">isObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isUndefined">isUndefined</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-channelFactory">channelFactory</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">source/model.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { isUndefined, isEqual, isObject } from &apos;./utils.js&apos;
+import PubSub from &apos;./pubsub.js&apos;
+const map = new Map()
+/** Model with pubsub functionality  */
+class Model {
+  /**
+   * @param {Object} [defaults] - default arguments for the model.
+   * @example
+   * // Set a model with a string key and string as value
+   * let model = new Model({id: 10})
+   * console.log(model.get(&quot;id&quot;)) //10
+   *
+   * Warning:  pasing arguments to contructor(defaults) will not fire events
+  */
+  constructor(defaults = null) {
+    this._pubsub = new PubSub()
+    if(arguments.length &gt; 1) throw new Error(`Passing more than one argument to the contructor, expected 1 got ${arguments.length}`)
+    if(defaults &amp;&amp; !isObject(defaults)) throw new Error(`Argument should be Object, got ${typeof defaults}`)
+    if(defaults) this.set(defaults, undefined, { silent: true })
+  }
+  /**
+  * Returns the pubsub instance
+  */
+  get pubsub() {
+    return this._pubsub
+  }
+  /**
+  * Model set.
+  * @param {(string|Object)} key - key can be string or {}.
+  * @param {(string|Object)} [value] - value can be string or {}, not used if the key is an {}.
+  * @param {Object} [options] - model options.
+  * @example
+  * // Set a model with a string key and string as value
+  * model.set(&quot;name&quot;, &quot;Vitalie&quot;)
+  * @example
+  * // Set a model with a string key and object as value
+  * model.set(&quot;person&quot;, {
+  *   firstName: &quot;Vitalie&quot;,
+  *   lastName: &quot;Jerebnii&quot;
+  * })
+  * @example
+  * // Set a model with an object and mixed values
+  * model.set({
+  *   id: 10,
+  *   person: {
+  *     firstName: &quot;Vitalie&quot;,
+  *     lastName: &quot;Jerebnii&quot;
+  *   }
+  * })
+  * @example
+  * // Set a model without dispatching an event (silent mode)
+  * model.set(&quot;name&quot;, &quot;Vitalie&quot;, {silent: true})
+  */
+  set(key, value, options) {
+    if(isUndefined(key)) {
+      throw new Error(&quot;Key is undefined&quot;)
+      return false
+    }
+    if(!isObject(key) &amp;&amp; !isUndefined(value)) {
+      this._setSingleKey(key, value, options)
+    } else {
+      this._objToStrMap(key)
+    }
+  }
+  /**
+  * Model get.
+  * @param {(string)} key - model key.
+  * @return {string|Object} The model value as string or object
+  * @example
+  * // Set a model with a string key and string as value
+  * model.set(&quot;name&quot;, &quot;Vitalie&quot;)
+  * let name = model.get(&quot;name&quot;)
+  * console.log(name) // &quot;Vitalie&quot;
+  */
+  get(key) {
+    return map.get(key)
+  }
+  /**
+  * Set a single key with value
+  * @param {string} key
+  * @param {(string|Object)} value
+  */
+  _setSingleKey(key,value, options = {}) {
+    if(this._isValueChanged(key,value)) {
+      map.set(key, value)
+      if(!options.silent)
+        this._pubsub.publish(key, value)
+    }
+  }
+  /**
+  * Converts an object to key values
+  * @param {Object} key - model key.
+  */
+  _objToStrMap(obj) {
+    for (const key of Object.keys(obj)) {
+      this._setSingleKey(key,obj[key])
+    }
+    //return map;
+  }
+  /**
+  * Checks if the new value is differend from the old one
+  * @param {(string|Object)} key - key can be string or {}.
+  * @param {(string|Object)} [value] - value can be string or {}, not used if the key is an {}.
+  * @return {boolean} boolean
+  */
+  _isValueChanged(key,value) {
+    if(map.has(key)) {
+      let oldValue = map.get(key)
+      return  !isEqual(value, oldValue)
+    }
+    return true
+  }
+
+}
+export default Model
+export var __useDefault = true
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

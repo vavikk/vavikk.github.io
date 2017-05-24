@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">source/request.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/Observer.js~Observer.html">Observer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/auth.js~Auth.html">Auth</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/channels.js~ChannelFactory.html">ChannelFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/deviceInfo.js~Device.html">Device</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/model.js~Model.html">Model</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/pubsub.js~PubSub.html">PubSub</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/request.js~Request.html">Request</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-listenTo">listenTo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isEqual">isEqual</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isObject">isObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isUndefined">isUndefined</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-channelFactory">channelFactory</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">source/request.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { isUndefined, isObject } from &apos;./utils.js&apos;
+
+/** Get and Post with promise */
+class Request {
+  /**
+  * @param {String} url - file url.
+  * @return {Promise} returns a promise
+  * @example
+  * let request = new Request()
+  * request.get(&quot;public/json/myFIle.json&quot;)
+  * .then(
+  *   data =&gt; {
+  *     console.log(&quot;Data is an object&quot;, data)
+  *     callback(data) // calls a function with this params
+  *   }
+  * )
+  */
+  get(url) {
+    if(arguments.length !== 1) {
+      throw new Error(`Post requires 1 arguments, got ${arguments.length}`)
+      return false
+    }
+    if(typeof url !== &quot;string&quot;)  {
+      throw new Error(`Url param should be a string, got ${typeof url}`)
+      return false
+    }
+
+    return this._request(&quot;GET&quot;, url)
+  }
+  /**
+  * @param {String} url - file url.
+  * @param {(String|Object)} data - data posted, Ex. string:  data= &quot;?name=Vitalie&quot; Ex. object: data = {name:&quot;Vitalie&quot;} 
+  * @return {Promise} returns a promise
+  * @example
+  * let request = new Request()
+  * request.post(&quot;/lobby/virtual-goods-buy-gift&quot;, someData)
+  * .then(
+  *   data =&gt; {
+  *     console.log(&quot;Data is an object&quot;, data)
+  *     callback(data) // calls a function with this params
+  *   }
+  * )
+  */
+  post(url, data) {
+    if(arguments.length !== 2) {
+      throw new Error(`Post requires 2 arguments, got ${arguments.length}`)
+      return false
+    }
+
+    if(isObject(data)) {
+      url += &quot;?&quot;
+      data = this._serialize(data)
+    }
+    return this._request(&quot;POST&quot;, url, data)
+  }
+  _serialize(obj) {
+    let str = []
+    for(let p in obj)
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + &quot;=&quot; + encodeURIComponent(obj[p]))
+      }
+    return str.join(&quot;&amp;&quot;)
+  }
+  //not used at the moment
+  _deepSerialize(obj, prefix) {
+    let str = [], p
+    for(p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        let k = prefix ? prefix + &quot;[&quot; + p + &quot;]&quot; : p, v = obj[p]
+        str.push((v !== null &amp;&amp; typeof v === &quot;object&quot;) ?
+          serialize(v, k) :
+          encodeURIComponent(k) + &quot;=&quot; + encodeURIComponent(v))
+      }
+    }
+    return str.join(&quot;&amp;&quot;)
+  }
+  _request(requestType, url, data = &quot;&quot;) {
+    return new Promise((resolve, reject) =&gt; {
+      let request = new XMLHttpRequest()
+      request.onreadystatechange = () =&gt; {
+        if(request.readyState === 4) {
+          if(request.status === 200) {
+            let response =  JSON.parse(request.response)
+            resolve(response)
+          } else {
+            reject((Error(request.statusText)))
+          }
+        }
+      }
+      request.open(requestType,  url, true)
+      request.setRequestHeader(&apos;Content-Type&apos;, &apos;application/x-www-form-urlencoded; charset=UTF-8&apos;)
+      request.send(data)
+    })
+  }
+}
+export default Request
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

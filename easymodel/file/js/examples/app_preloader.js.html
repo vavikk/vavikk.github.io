@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">js/examples/app_preloader.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/auth.js~Auth.html">Auth</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/deviceInfo.js~Device.html">Device</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/model.js~Model.html">Model</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/pubsub.js~PubSub.html">PubSub</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-listenTo">listenTo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isEqual">isEqual</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isObject">isObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isUndefined">isUndefined</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">js/examples/app_preloader.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Model from &apos;./model.js&apos;
+import Auth from &apos;./auth.js&apos;
+import {listenTo} from &apos;./listenTo.js&apos;
+let  backgroundImage,
+treesImage, groundImage
+{
+const v = &quot;FRAMEWORK VS 0&quot;
+console.log(v)
+}
+
+import CircleButton from &apos;./createjs/CircleButton&apos;
+import TestText from &apos;./createjs/TestText&apos;
+import LoadingBar from &apos;./createjs/LoadingBar&apos;
+
+
+// Init stage
+const canvas = document.getElementById(&quot;demo&quot;)
+
+const stage = new createjs.Stage(&quot;demo&quot;);
+
+// // Button black
+// const btn = new CircleButton(&apos;Hi&apos;);
+// btn.x = 50; btn.y = 50;
+// stage.addChild(btn);
+
+//creating the progress label
+let loadProgressLabel = new createjs.Text(&quot;&quot;,&quot;18px Verdana&quot;,&quot;black&quot;);
+loadProgressLabel.lineWidth = 200;
+loadProgressLabel.textAlign = &quot;center&quot;;
+loadProgressLabel.x = canvas.width/2;
+loadProgressLabel.y = 50;
+stage.addChild(loadProgressLabel);
+
+//creatin a loading bar from our class and passing some arguments
+
+const bar = new LoadingBar(400, 40, 5, &quot;blue&quot;, &quot;black&quot;, canvas.width/2 - 200);
+
+//adding the container with the elements to our stage
+   stage.addChild(bar)
+
+   //creating the loading queue and the events for progress and completion
+const preload = new createjs.LoadQueue(false);
+preload.addEventListener(&quot;complete&quot;, handleComplete);
+preload.addEventListener(&quot;progress&quot;, handleProgress);
+
+//adding our files to the queue
+preload.loadFile({id: &quot;background&quot;, src:&quot;public/images/bg_palasunv1.jpg&quot;});
+preload.loadManifest([{id: &quot;trees&quot;, src:&quot;public/images/gold.png&quot;},
+     {id: &quot;ground&quot;, src:&quot;public/images/next_to_unlock.png&quot;}]);
+
+stage.update();
+function handleProgress(){
+	//changing the length of our loading bar accordingly
+	bar.loadingBar.scaleX = preload.progress * bar.width;
+	//and the precentage in the loading label
+	const progresPrecentage = Math.round(preload.progress*100);
+	loadProgressLabel.text = progresPrecentage + &quot;% Loaded&quot; ;
+	//updating the stage to draw the changes
+	stage.update();
+}
+
+//this function is called when everyhing is loaded
+function handleComplete() {
+	//getting the loaded images
+	backgroundImage = preload.getResult(&quot;background&quot;);
+	treesImage = preload.getResult(&quot;trees&quot;);
+  groundImage = preload.getResult(&quot;ground&quot;);
+
+	//changing the label accordingly and updating the stage to show it
+	loadProgressLabel.text = &quot;Loading complete click to start&quot;;
+	stage.update();
+
+	//adding an click event listner to our canvas so that we start our game on a mouse click
+	canvas.addEventListener(&quot;click&quot;, handleClick);
+}
+
+function handleClick() {
+	//on click we call our start(); function
+	start();
+	//we remove the progres label and loading bar and also remove the click event listener
+	stage.removeChild(loadProgressLabel, bar);
+	canvas.removeEventListener(&quot;click&quot;, handleClick);
+}
+
+function start() {
+	//adding the background image
+	let background = new createjs.Bitmap(backgroundImage);
+	stage.addChild(background);
+
+	//adding the trees image
+	let  trees = new createjs.Bitmap(treesImage);
+	stage.addChild(trees);
+
+	//adding the ground image and positioning it
+	let  ground = new createjs.Bitmap(groundImage);
+	stage.addChild(ground);
+	ground.y = 164;
+
+	//updating the stage
+	stage.update();
+}
+
+// // Button purple
+// const btn2 = new CircleButton(&apos;hello&apos;, &apos;purple&apos;, 50);
+// btn2.x = 100; btn2.y = 100;
+// stage.addChild(btn2);
+// btn2.addEventListener(&apos;animationEnd&apos;, function() {
+//   console.log (&apos;fadeIn animation completed&apos;)
+// })
+//
+// btn2.addEventListener(&apos;click&apos;, function(e) {
+//   console.log (&apos;Button CLicked&apos;, e.target)
+//   stage.removeChild(btn2);
+// })
+//
+// for(let i = 0; i &lt; 12 ; i++ ) {
+//   let tmp =  new CircleButton(&apos;h&apos;+i, &apos;red&apos;, 50 * Math.random())
+//   tmp.x = Math.floor(Math.random() * 516) + 10
+//   tmp.y = Math.floor(Math.random() * 516) + 10
+//   console.log(tmp.x)
+//   stage.addChild(tmp);
+// }
+
+
+// const someText = new TestText(&quot;bazinga&quot;, &quot;#666&quot;)
+//
+// stage.addChild(someText);
+
+
+
+// const colors = [&quot;#828b20&quot;, &quot;#b0ac31&quot;, &quot;#cbc53d&quot;, &quot;#fad779&quot;, &quot;#f9e4ad&quot;, &quot;#faf2db&quot;, &quot;#563512&quot;, &quot;#9b4a0b&quot;, &quot;#d36600&quot;, &quot;#fe8a00&quot;, &quot;#f9a71f&quot;]
+// let oldPt,oldMidPt,title,color,stroke,index, drawingCanvas
+// index = 0
+// stage.autoClear = false;
+// stage.enableDOMEvents(true);
+// createjs.Touch.enable(stage);
+// createjs.Ticker.setFPS(24);
+// drawingCanvas = new createjs.Shape();
+// stage.addEventListener(&quot;stagemousedown&quot;, handleMouseDown);
+// stage.addEventListener(&quot;stagemouseup&quot;, handleMouseUp);
+// stage.addChild(drawingCanvas)
+// stage.update()
+//
+//
+//
+//
+// function handleMouseDown(event) {
+//   console.log(&quot;CLICK&quot;)
+// 	if (!event.primary) { return; }
+//
+// 	color = colors[(index++) % colors.length];
+//   console.log( colors[(index++) % colors.length])
+// 	stroke = Math.random() * 30 + 10 | 0;
+// 	oldPt = new createjs.Point(stage.mouseX, stage.mouseY);
+// 	oldMidPt = oldPt.clone();
+// 	stage.addEventListener(&quot;stagemousemove&quot;, handleMouseMove);
+// }
+//
+// function handleMouseMove(event) {
+//   console.log(&quot;MOUSE MOVE&quot;)
+// 	if (!event.primary) { return; }
+// 	var midPt = new createjs.Point(oldPt.x + stage.mouseX &gt;&gt; 1, oldPt.y + stage.mouseY &gt;&gt; 1);
+//
+// 	drawingCanvas.graphics.clear().setStrokeStyle(stroke, &apos;round&apos;, &apos;round&apos;).beginStroke(color).moveTo(midPt.x, midPt.y).curveTo(oldPt.x, oldPt.y, oldMidPt.x, oldMidPt.y);
+// //console.log(color)
+// 	oldPt.x = stage.mouseX;
+// 	oldPt.y = stage.mouseY;
+//
+// 	oldMidPt.x = midPt.x;
+// 	oldMidPt.y = midPt.y;
+//
+// 	stage.update();
+// }
+//
+// function handleMouseUp(event) {
+// 	if (!event.primary) { return; }
+// 	stage.removeEventListener(&quot;stagemousemove&quot;, handleMouseMove);
+// }
+
+
+// Ticker
+createjs.Ticker.addEventListener(&quot;tick&quot;, stage)
+
+
+
+
+//
+// let model = new Model();
+// model.set(&quot;lambda&quot;)
+
+//
+// listenTo(model, &quot;avatar&quot;, message)
+// model.set({
+//   name: &quot;Vitalie&quot;,
+//   avatar: {
+//     id: 10,
+//     name: &quot;zece&quot;,
+//     lastname: {
+//       zoom: &quot;1&quot;
+//     }
+//   }
+// })
+// //
+// model.set({
+//   name: &quot;Vitalie&quot;,
+//   avatar: {
+//     id: 10,
+//     name: &quot;zece&quot;,
+//     lastname: {
+//       zoom: &quot;2&quot;
+//     }
+//   }
+// })
+
+// USING AUTH
+// let auth = new Auth()
+// auth.getGameInfo().then((data) =&gt; {
+//   runGame(data)
+// })
+
+//
+// function runGame(data) {
+//   const {sessionId, gameId} = data
+//   console.log(&quot;FINNALY :&quot;,sessionId, gameId)
+// }
+
+//
+// console.log(&quot;MODEL 4.5&quot;)
+//
+// let model = new Model();
+
+// listenTo(model, &quot;name&quot;, message)
+
+//model.set(&quot;name&quot;, &quot;Dan&quot;)
+
+//
+//
+//
+//
+// model.set(&quot;name&quot;, &quot;vitalie&quot;)
+// model.set(&quot;name&quot;, &quot;Dan&quot;)
+// model.set(&quot;name&quot;, &quot;Dan&quot;)
+//
+// listenTo(model, &quot;avatar&quot;, headWasChanged)
+// model.set(&quot;avatar&quot;, {
+//   name: &quot;myAvatar&quot;
+// })
+// model.set(&quot;avatar&quot;, {
+//   name: &quot;myAvatar&quot;,
+//   id: 11
+// })
+
+
+
+
+// model.set({
+//   name: &quot;Vitalie&quot;,
+//   avatar: {
+//     id: 10,
+//     name: &quot;zece&quot;,
+//     lastname: &quot;duo&quot;
+//   }
+// })
+// //
+// model.set({
+//   name: &quot;Vitalie&quot;,
+//   avatar: {
+//     id: 10,
+//     name: &quot;zece&quot;
+//   }
+// })
+
+
+// model.set(&quot;name&quot;, &quot;Vitalie&quot;)
+// model.set(&quot;name&quot;, &quot;Vitalie&quot;)
+// model.set(&quot;name&quot;, &quot;Dan&quot;)
+// model.set(&quot;avatar&quot;, {
+//   id: 10,
+//   name: &quot;zece&quot;
+// })
+
+
+function message(key, val) {
+  console.log(&quot;Model was changed&quot;, key, val)
+}
+function headWasChanged(key, val) {
+  console.log(&quot;HEAD WAS CHANGE&quot;, key, val)
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

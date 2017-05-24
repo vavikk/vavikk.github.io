@@ -1,0 +1,1124 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "Literal",
+        "value": "use strict",
+        "raw": "\"use strict\"",
+        "range": [
+          0,
+          12
+        ],
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 0
+          },
+          "end": {
+            "line": 1,
+            "column": 12
+          }
+        }
+      },
+      "range": [
+        0,
+        14
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "ImportDeclaration",
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "local": {
+            "type": "Identifier",
+            "name": "isUndefined",
+            "range": [
+              23,
+              34
+            ],
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 9
+              },
+              "end": {
+                "line": 2,
+                "column": 20
+              }
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "name": "isUndefined",
+            "range": [
+              23,
+              34
+            ],
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 9
+              },
+              "end": {
+                "line": 2,
+                "column": 20
+              }
+            }
+          },
+          "range": [
+            23,
+            34
+          ],
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 9
+            },
+            "end": {
+              "line": 2,
+              "column": 20
+            }
+          }
+        }
+      ],
+      "source": {
+        "type": "Literal",
+        "value": "./utils.js",
+        "raw": "'./utils.js'",
+        "range": [
+          42,
+          54
+        ],
+        "loc": {
+          "start": {
+            "line": 2,
+            "column": 28
+          },
+          "end": {
+            "line": 2,
+            "column": 40
+          }
+        },
+        "trailingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n* listenTo\r\n* Listens for a model change and fires the callback function\r\n* @param {model} model - model\r\n* @param {string} action - the key/symbol of a model\r\n* @param {function} func - the callback/ function triggered by model change\r\n* @example\r\n* // Listening for a model change\r\n* let myModel = new Model()\r\n*\r\n* listenTo(myModel, \"name\", myFunction)\r\n*\r\n* myModel.set(\"name\", \"Vitalie\") // The model was changed  name Vitalie\r\n* myModel.set(\"name\", \"Dan\") // The model was changed  name Dan\r\n*\r\n* function myFunction(key, value) {\r\n*   console.log(\"The model was changed \", key, value )\r\n* }\r\n",
+            "range": [
+              56,
+              662
+            ],
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 0
+              },
+              "end": {
+                "line": 21,
+                "column": 2
+              }
+            }
+          }
+        ]
+      },
+      "range": [
+        14,
+        664
+      ],
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 22,
+          "column": 0
+        }
+      }
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "listenTo",
+          "range": [
+            680,
+            688
+          ],
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 16
+            },
+            "end": {
+              "line": 22,
+              "column": 24
+            }
+          }
+        },
+        "params": [
+          {
+            "type": "Identifier",
+            "name": "model",
+            "range": [
+              689,
+              694
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 25
+              },
+              "end": {
+                "line": 22,
+                "column": 30
+              }
+            }
+          },
+          {
+            "type": "Identifier",
+            "name": "action",
+            "range": [
+              696,
+              702
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 32
+              },
+              "end": {
+                "line": 22,
+                "column": 38
+              }
+            }
+          },
+          {
+            "type": "Identifier",
+            "name": "func",
+            "range": [
+              704,
+              708
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 40
+              },
+              "end": {
+                "line": 22,
+                "column": 44
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "IfStatement",
+              "test": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "Identifier",
+                  "name": "isUndefined",
+                  "range": [
+                    718,
+                    729
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 23,
+                      "column": 5
+                    },
+                    "end": {
+                      "line": 23,
+                      "column": 16
+                    }
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "name": "model",
+                    "range": [
+                      730,
+                      735
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 23,
+                        "column": 17
+                      },
+                      "end": {
+                        "line": 23,
+                        "column": 22
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  718,
+                  736
+                ],
+                "loc": {
+                  "start": {
+                    "line": 23,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 23
+                  }
+                }
+              },
+              "consequent": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ThrowStatement",
+                    "argument": {
+                      "type": "NewExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "Error",
+                        "range": [
+                          755,
+                          760
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 24,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 24,
+                            "column": 19
+                          }
+                        }
+                      },
+                      "arguments": [
+                        {
+                          "type": "Literal",
+                          "value": "model is undefined",
+                          "raw": "\"model is undefined\"",
+                          "range": [
+                            761,
+                            781
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 24,
+                              "column": 20
+                            },
+                            "end": {
+                              "line": 24,
+                              "column": 40
+                            }
+                          }
+                        }
+                      ],
+                      "range": [
+                        751,
+                        782
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 24,
+                          "column": 10
+                        },
+                        "end": {
+                          "line": 24,
+                          "column": 41
+                        }
+                      }
+                    },
+                    "range": [
+                      745,
+                      788
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 24,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 25,
+                        "column": 4
+                      }
+                    }
+                  },
+                  {
+                    "type": "ReturnStatement",
+                    "argument": {
+                      "type": "Literal",
+                      "value": false,
+                      "raw": "false",
+                      "range": [
+                        795,
+                        800
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 25,
+                          "column": 11
+                        },
+                        "end": {
+                          "line": 25,
+                          "column": 16
+                        }
+                      }
+                    },
+                    "range": [
+                      788,
+                      804
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 25,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 26,
+                        "column": 2
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  738,
+                  805
+                ],
+                "loc": {
+                  "start": {
+                    "line": 23,
+                    "column": 25
+                  },
+                  "end": {
+                    "line": 26,
+                    "column": 3
+                  }
+                }
+              },
+              "alternate": null,
+              "range": [
+                715,
+                805
+              ],
+              "loc": {
+                "start": {
+                  "line": 23,
+                  "column": 2
+                },
+                "end": {
+                  "line": 26,
+                  "column": 3
+                }
+              }
+            },
+            {
+              "type": "IfStatement",
+              "test": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "Identifier",
+                  "name": "isUndefined",
+                  "range": [
+                    812,
+                    823
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 27,
+                      "column": 5
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 16
+                    }
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "name": "action",
+                    "range": [
+                      824,
+                      830
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 27,
+                        "column": 17
+                      },
+                      "end": {
+                        "line": 27,
+                        "column": 23
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  812,
+                  831
+                ],
+                "loc": {
+                  "start": {
+                    "line": 27,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 27,
+                    "column": 24
+                  }
+                }
+              },
+              "consequent": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ThrowStatement",
+                    "argument": {
+                      "type": "NewExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "Error",
+                        "range": [
+                          850,
+                          855
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 28,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 28,
+                            "column": 19
+                          }
+                        }
+                      },
+                      "arguments": [
+                        {
+                          "type": "Literal",
+                          "value": "action is undefined",
+                          "raw": "\"action is undefined\"",
+                          "range": [
+                            856,
+                            877
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 28,
+                              "column": 20
+                            },
+                            "end": {
+                              "line": 28,
+                              "column": 41
+                            }
+                          }
+                        }
+                      ],
+                      "range": [
+                        846,
+                        878
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 28,
+                          "column": 10
+                        },
+                        "end": {
+                          "line": 28,
+                          "column": 42
+                        }
+                      }
+                    },
+                    "range": [
+                      840,
+                      884
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 28,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 29,
+                        "column": 4
+                      }
+                    }
+                  },
+                  {
+                    "type": "ReturnStatement",
+                    "argument": {
+                      "type": "Literal",
+                      "value": false,
+                      "raw": "false",
+                      "range": [
+                        891,
+                        896
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 29,
+                          "column": 11
+                        },
+                        "end": {
+                          "line": 29,
+                          "column": 16
+                        }
+                      }
+                    },
+                    "range": [
+                      884,
+                      900
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 29,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 30,
+                        "column": 2
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  833,
+                  901
+                ],
+                "loc": {
+                  "start": {
+                    "line": 27,
+                    "column": 26
+                  },
+                  "end": {
+                    "line": 30,
+                    "column": 3
+                  }
+                }
+              },
+              "alternate": null,
+              "range": [
+                809,
+                901
+              ],
+              "loc": {
+                "start": {
+                  "line": 27,
+                  "column": 2
+                },
+                "end": {
+                  "line": 30,
+                  "column": 3
+                }
+              }
+            },
+            {
+              "type": "IfStatement",
+              "test": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "Identifier",
+                  "name": "isUndefined",
+                  "range": [
+                    908,
+                    919
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 31,
+                      "column": 5
+                    },
+                    "end": {
+                      "line": 31,
+                      "column": 16
+                    }
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "name": "func",
+                    "range": [
+                      920,
+                      924
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 31,
+                        "column": 17
+                      },
+                      "end": {
+                        "line": 31,
+                        "column": 21
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  908,
+                  925
+                ],
+                "loc": {
+                  "start": {
+                    "line": 31,
+                    "column": 5
+                  },
+                  "end": {
+                    "line": 31,
+                    "column": 22
+                  }
+                }
+              },
+              "consequent": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ThrowStatement",
+                    "argument": {
+                      "type": "NewExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "Error",
+                        "range": [
+                          944,
+                          949
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 32,
+                            "column": 14
+                          },
+                          "end": {
+                            "line": 32,
+                            "column": 19
+                          }
+                        }
+                      },
+                      "arguments": [
+                        {
+                          "type": "Literal",
+                          "value": "func is undefined",
+                          "raw": "\"func is undefined\"",
+                          "range": [
+                            950,
+                            969
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 32,
+                              "column": 20
+                            },
+                            "end": {
+                              "line": 32,
+                              "column": 39
+                            }
+                          }
+                        }
+                      ],
+                      "range": [
+                        940,
+                        970
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 32,
+                          "column": 10
+                        },
+                        "end": {
+                          "line": 32,
+                          "column": 40
+                        }
+                      }
+                    },
+                    "range": [
+                      934,
+                      976
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 32,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 33,
+                        "column": 4
+                      }
+                    }
+                  },
+                  {
+                    "type": "ReturnStatement",
+                    "argument": {
+                      "type": "Literal",
+                      "value": false,
+                      "raw": "false",
+                      "range": [
+                        983,
+                        988
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 33,
+                          "column": 11
+                        },
+                        "end": {
+                          "line": 33,
+                          "column": 16
+                        }
+                      }
+                    },
+                    "range": [
+                      976,
+                      992
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 33,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 34,
+                        "column": 2
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  927,
+                  993
+                ],
+                "loc": {
+                  "start": {
+                    "line": 31,
+                    "column": 24
+                  },
+                  "end": {
+                    "line": 34,
+                    "column": 3
+                  }
+                }
+              },
+              "alternate": null,
+              "range": [
+                905,
+                993
+              ],
+              "loc": {
+                "start": {
+                  "line": 31,
+                  "column": 2
+                },
+                "end": {
+                  "line": 34,
+                  "column": 3
+                }
+              }
+            },
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "MemberExpression",
+                  "computed": false,
+                  "object": {
+                    "type": "MemberExpression",
+                    "computed": false,
+                    "object": {
+                      "type": "Identifier",
+                      "name": "model",
+                      "range": [
+                        997,
+                        1002
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 35,
+                          "column": 2
+                        },
+                        "end": {
+                          "line": 35,
+                          "column": 7
+                        }
+                      }
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "pubsub",
+                      "range": [
+                        1003,
+                        1009
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 35,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 35,
+                          "column": 14
+                        }
+                      }
+                    },
+                    "range": [
+                      997,
+                      1009
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 35,
+                        "column": 2
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 14
+                      }
+                    }
+                  },
+                  "property": {
+                    "type": "Identifier",
+                    "name": "subscribe",
+                    "range": [
+                      1010,
+                      1019
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 35,
+                        "column": 15
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 24
+                      }
+                    }
+                  },
+                  "range": [
+                    997,
+                    1019
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 35,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 35,
+                      "column": 24
+                    }
+                  }
+                },
+                "arguments": [
+                  {
+                    "type": "Identifier",
+                    "name": "action",
+                    "range": [
+                      1020,
+                      1026
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 35,
+                        "column": 25
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 31
+                      }
+                    }
+                  },
+                  {
+                    "type": "Identifier",
+                    "name": "func",
+                    "range": [
+                      1028,
+                      1032
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 35,
+                        "column": 33
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 37
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  997,
+                  1033
+                ],
+                "loc": {
+                  "start": {
+                    "line": 35,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 35,
+                    "column": 38
+                  }
+                }
+              },
+              "range": [
+                997,
+                1035
+              ],
+              "loc": {
+                "start": {
+                  "line": 35,
+                  "column": 2
+                },
+                "end": {
+                  "line": 36,
+                  "column": 0
+                }
+              }
+            }
+          ],
+          "range": [
+            710,
+            1036
+          ],
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 46
+            },
+            "end": {
+              "line": 36,
+              "column": 1
+            }
+          }
+        },
+        "generator": false,
+        "expression": false,
+        "range": [
+          671,
+          1036
+        ],
+        "loc": {
+          "start": {
+            "line": 22,
+            "column": 7
+          },
+          "end": {
+            "line": 36,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\r\n* listenTo\r\n* Listens for a model change and fires the callback function\r\n* @param {model} model - model\r\n* @param {string} action - the key/symbol of a model\r\n* @param {function} func - the callback/ function triggered by model change\r\n* @example\r\n* // Listening for a model change\r\n* let myModel = new Model()\r\n*\r\n* listenTo(myModel, \"name\", myFunction)\r\n*\r\n* myModel.set(\"name\", \"Vitalie\") // The model was changed  name Vitalie\r\n* myModel.set(\"name\", \"Dan\") // The model was changed  name Dan\r\n*\r\n* function myFunction(key, value) {\r\n*   console.log(\"The model was changed \", key, value )\r\n* }\r\n",
+            "range": [
+              56,
+              662
+            ],
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 0
+              },
+              "end": {
+                "line": 21,
+                "column": 2
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "specifiers": [],
+      "source": null,
+      "range": [
+        664,
+        1036
+      ],
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 0
+        },
+        "end": {
+          "line": 36,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\r\n* listenTo\r\n* Listens for a model change and fires the callback function\r\n* @param {model} model - model\r\n* @param {string} action - the key/symbol of a model\r\n* @param {function} func - the callback/ function triggered by model change\r\n* @example\r\n* // Listening for a model change\r\n* let myModel = new Model()\r\n*\r\n* listenTo(myModel, \"name\", myFunction)\r\n*\r\n* myModel.set(\"name\", \"Vitalie\") // The model was changed  name Vitalie\r\n* myModel.set(\"name\", \"Dan\") // The model was changed  name Dan\r\n*\r\n* function myFunction(key, value) {\r\n*   console.log(\"The model was changed \", key, value )\r\n* }\r\n",
+          "range": [
+            56,
+            662
+          ],
+          "loc": {
+            "start": {
+              "line": 3,
+              "column": 0
+            },
+            "end": {
+              "line": 21,
+              "column": 2
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    0,
+    1036
+  ],
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 36,
+      "column": 1
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\r\n* listenTo\r\n* Listens for a model change and fires the callback function\r\n* @param {model} model - model\r\n* @param {string} action - the key/symbol of a model\r\n* @param {function} func - the callback/ function triggered by model change\r\n* @example\r\n* // Listening for a model change\r\n* let myModel = new Model()\r\n*\r\n* listenTo(myModel, \"name\", myFunction)\r\n*\r\n* myModel.set(\"name\", \"Vitalie\") // The model was changed  name Vitalie\r\n* myModel.set(\"name\", \"Dan\") // The model was changed  name Dan\r\n*\r\n* function myFunction(key, value) {\r\n*   console.log(\"The model was changed \", key, value )\r\n* }\r\n",
+      "range": [
+        56,
+        662
+      ],
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 0
+        },
+        "end": {
+          "line": 21,
+          "column": 2
+        }
+      }
+    }
+  ]
+}

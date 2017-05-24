@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">source/app.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/Observer.js~Observer.html">Observer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/auth.js~Auth.html">Auth</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/channels.js~ChannelFactory.html">ChannelFactory</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/deviceInfo.js~Device.html">Device</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/model.js~Model.html">Model</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/pubsub.js~PubSub.html">PubSub</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/request.js~Request.html">Request</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-listenTo">listenTo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isEqual">isEqual</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isObject">isObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isUndefined">isUndefined</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-channelFactory">channelFactory</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">source/app.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+import Request from &quot;./request&quot;
+
+let request  = new Request()
+request.get(&quot;./test/assets/countries.json&quot;)
+.then(
+  data =&gt; console.log(data)
+)
+let postData = {
+  username: &quot;vitalietest300@test.com&quot;,
+  password: &quot;Qa!123456&quot;,
+  clientapp:  &quot;WebCasino-DEV&quot;,
+  force_logout: &quot;1&quot;
+}
+
+
+// request.post(
+//            &quot;https://pstest-webservices.palainteractive.com/authentication/login?&quot;,
+//            postData
+//            //&quot;username=vitalietest300%40test.com&amp;password=Qa!123456&amp;clientapp=WebCasino-DEV&amp;force_logout=1&quot;
+//          )
+//          .then(
+//            data =&gt; {
+//              console.log( &quot;Data is an object&quot;, data )
+//             //  let {images,frames,animations,texturepacker } = data
+//             //  console.log(images)
+//            }
+//           )
+
+
+
+// import channel from &quot;./channels&quot;
+//
+// let ch1 = channel.getChannel(&quot;Zuum&quot;)
+//  ch1.subscribe(&quot;ModalWindow/open&quot;, message)
+//
+//  ch1.publish(&apos;ModalWindow/open&apos;, {responsive:true, title: &quot;My Modal Title&quot;}) // will call the message function
+//
+//  function message(key, value) {
+//    console.log(&quot;channels&quot;, key, value)
+//  }
+
+// testing models defaults
+// import Model from &apos;./model&apos;
+//
+// class DefaultModel extends Model {}
+// let defaultModel = new DefaultModel({
+//   id: 10,
+//   20: 20
+//
+// });
+//
+// console.log(defaultModel.get(&quot;20&quot;))
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.8)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
